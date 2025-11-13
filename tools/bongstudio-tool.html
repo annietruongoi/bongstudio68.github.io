@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <!-- NEW FILE: /tools/bongstudio-tool.html — Bongstudio • MXD210 -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <title>Bongstudio Tool v1 — Product JSON Builder</title>
+
+  <!-- Tool nội bộ: không index -->
+  <meta name="robots" content="noindex,follow"/>
+  <link rel="canonical" href="https://bongstudio68.github.io/tools/bongstudio-tool.html"/>
+
+  <!-- Dùng chung analytics + CSS để giữ mạch -->
+  <script defer src="/assets/js/analytics.js"></script>
+  <link rel="stylesheet" href="/assets/site.css"/>
+
+  <style>
+    .tool-wrap{
+      max-width:960px;
+      margin:0 auto;
+      padding:16px 12px 40px;
+    }
+    .tool-header{
+      margin-bottom:16px;
+    }
+    .tool-header h1{
+      font-size:20px;
+      margin-bottom:4px;
+    }
+    .tool-header p{
+      font-size:13px;
+      opacity:.8;
+      line-height:1.5;
+    }
+    .tool-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+      gap:16px;
+      margin-top:12px;
+    }
+    @media (max-width:768px){
+      .tool-grid{grid-template-columns:minmax(0,1fr);}
+    }
+    .tool-card{
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,0.4);
+      padding:12px;
+      background:rgba(15,23,42,0.8);
+    }
+    .tool-card h2{
+      font-size:14px;
+      margin-bottom:6px;
+    }
+    .tool-card small{
+      font-size:11px;
+      opacity:.8;
+    }
+    .field{
+      margin-top:8px;
+    }
+    .field label{
+      display:block;
+      font-size:12px;
+      margin-bottom:2px;
+    }
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      font:inherit;
+      padding:6px 8px;
+      border-radius:8px;
+      border:1px solid rgba(148,163,184,0.5);
+      background-color:rgba(15,23,42,0.9);
+      color:inherit;
+      resize:vertical;
+    }
+    .field textarea{
+      min-height:60px;
+    }
+    .hint{
+      font-size:11px;
+      opacity:.7;
+      margin-top:2px;
+    }
+    .btn-row{
+      margin-top:10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:13px;
+      cursor:pointer;
+      background:#f97316;
+      color:#0b0f19;
+      font-weight:600;
+    }
+    .btn.secondary{
+      background:transparent;
+      color:inherit;
+      border:1px solid rgba(148,163,184,0.6);
+    }
+    .output-area{
+      width:100%;
+      min-height:140px;
+      font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;
+      padding:8px;
+      border-radius:8px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,0.9);
+      color:inherit;
+      resize:vertical;
+      white-space:pre;
+    }
+    .output-label{
+      font-size:12px;
+      margin:6px 0 2px;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:6px;
+    }
+    .pill{
+      font-size:11px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="inner container">
+    <div class="brand">Bongstudio • Tool</div>
+    <nav>
+      <a href="/">Trang chủ</a>
+      <a href="/store.html">Cửa hàng</a>
+    </nav>
+  </div>
+</header>
+
+<div class="tool-wrap">
+  <div class="tool-header">
+    <h1>Bongstudio Tool v1 — Product JSON Builder</h1>
+    <p>
+      Nhập thông tin sản phẩm (tên, link gốc, giá, danh mục, merchant) → tool sẽ sinh ra
+      <strong>JSON</strong> và <strong>snippet HTML</strong> theo chuẩn MXD/Bongstudio.
+      JSON dùng cho data, HTML dùng cho lưới sản phẩm hoặc g.html sau này.
+    </p>
+  </div>
+
+  <div class="tool-grid">
+    <!-- Form bên trái -->
+    <div class="tool-card">
+      <h2>1. Thông tin sản phẩm</h2>
+      <small>Điền đơn giản, những gì chưa có thì có thể bỏ trống.</small>
+
+      <div class="field">
+        <label for="title">Tên sản phẩm</label>
+        <input id="title" type="text" placeholder="Ví dụ: Áo cardigan len dáng rộng cho nữ"/>
+        <div class="hint">Dùng để sinh SKU + title hiển thị.</div>
+      </div>
+
+      <div class="field">
+        <label for="origin_url">Link gốc trên sàn</label>
+        <input id="origin_url" type="url" placeholder="https://shopee.vn/... hoặc https://www.lazada.vn/..."/>
+        <div class="hint">Link gốc thật từ Shopee / Lazada / TikTok / Tiki.</div>
+      </div>
+
+      <div class="field">
+        <label for="merchant">Sàn (merchant)</label>
+        <select id="merchant">
+          <option value="">-- Chọn sàn --</option>
+          <option value="shopee">Shopee</option>
+          <option value="lazada">Lazada</option>
+          <option value="tiktok">TikTok</option>
+          <option value="tiki">Tiki</option>
+        </select>
+        <div class="hint">Quan trọng: mxd-affiliate dùng field này để sinh isclix đúng base.</div>
+      </div>
+
+      <div class="field">
+        <label for="category">Danh mục chính (category slug)</label>
+        <select id="category">
+          <option value="">-- Chọn danh mục --</option>
+          <option value="gia-dung-decor-nha-cua">Gia dụng, decor nhà cửa</option>
+          <option value="thoi-trang-nu">Thời trang nữ</option>
+          <option value="thoi-trang-nam">Thời trang nam</option>
+          <option value="quan-ao-em-be">Quần áo em bé</option>
+          <option value="suc-khoe-thuc-pham-chuc-nang">Sức khỏe, thực phẩm chức năng</option>
+          <option value="sach">Sách</option>
+          <option value="do-an">Đồ ăn</option>
+        </select>
+        <div class="hint">Khớp với các trang cat-*.html mà ta vừa tạo.</div>
+      </div>
+
+      <div class="field">
+        <label for="price">Giá hiện tại (VND)</label>
+        <input id="price" type="number" inputmode="numeric" placeholder="Ví dụ: 199000"/>
+      </div>
+
+      <div class="field">
+        <label for="price_old">Giá gạch (nếu có, VND)</label>
+        <input id="price_old" type="number" inputmode="numeric" placeholder="Ví dụ: 299000"/>
+      </div>
+
+      <div class="field">
+        <label for="img_hint">Ảnh (gợi ý path)</label>
+        <input id="img_hint" type="text" disabled value="/assets/img/products/&lt;sku&gt;.webp"/>
+        <div class="hint">Tool sẽ gợi ý SKU và path ảnh dựa trên tên sản phẩm.</div>
+      </div>
+
+      <div class="field">
+        <label for="tags">Tags (phân tách bằng dấu phẩy)</label>
+        <input id="tags" type="text" placeholder="ví dụ: ao-khoac, cardigan, nu, thu-dong"/>
+        <div class="hint">Dùng cho filter chi tiết hơn nếu cần.</div>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill" onclick="quickTag('nu')">+ nữ</span>
+        <span class="pill" onclick="quickTag('nam')">+ nam</span>
+        <span class="pill" onclick="quickTag('tre-em')">+ trẻ-em</span>
+        <span class="pill" onclick="quickTag('thu-dong')">+ thu-đông</span>
+        <span class="pill" onclick="quickTag('he')">+ hè</span>
+      </div>
+
+      <div class="field">
+        <label for="description">Mô tả ngắn</label>
+        <textarea id="description" placeholder="Cảm nhận, điểm mạnh của sản phẩm dưới góc nhìn người dùng Việt."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn" onclick="generateOutput()">Sinh JSON + HTML</button>
+        <button type="button" class="btn secondary" onclick="resetForm()">Xóa form</button>
+      </div>
+    </div>
+
+    <!-- Output bên phải -->
+    <div class="tool-card">
+      <h2>2. Kết quả</h2>
+      <small>Copy dán vào JSON / HTML theo đúng vị trí trong repo.</small>
+
+      <div class="output-label">JSON sản phẩm (đưa vào file data hoặc products.json)</div>
+      <textarea id="json_output" class="output-area" readonly placeholder="// JSON sẽ hiện ở đây sau khi bấm Sinh JSON + HTML"></textarea>
+
+      <div class="output-label" style="margin-top:8px;">Snippet HTML card (dùng cho lưới sản phẩm)</div>
+      <textarea id="html_output" class="output-area" readonly placeholder="<!-- HTML card sẽ hiện ở đây -->"></textarea>
+    </div>
+  </div>
+</div>
+
+<script>
+  function slugify(text){
+    return (text || "")
+      .toString()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+      .slice(0, 80);
+  }
+
+  function quickTag(tag){
+    const input = document.getElementById('tags');
+    const current = input.value.trim();
+    if(!current){
+      input.value = tag;
+      return;
+    }
+    const parts = current.split(',').map(s => s.trim()).filter(Boolean);
+    if(!parts.includes(tag)){
+      parts.push(tag);
+      input.value = parts.join(', ');
+    }
+  }
+
+  function generateOutput(){
+    const title = document.getElementById('title').value.trim();
+    const origin_url = document.getElementById('origin_url').value.trim();
+    const merchant = document.getElementById('merchant').value.trim();
+    const category = document.getElementById('category').value.trim();
+    const price = document.getElementById('price').value.trim();
+    const price_old = document.getElementById('price_old').value.trim();
+    const tagsRaw = document.getElementById('tags').value.trim();
+    const description = document.getElementById('description').value.trim();
+
+    if(!title || !origin_url || !merchant || !category){
+      alert('Cần ít nhất: Tên sản phẩm, Link gốc, Sàn (merchant), Danh mục.');
+      return;
+    }
+
+    const skuBase = slugify(title);
+    const sku = skuBase || ('sp-' + Date.now());
+    document.getElementById('img_hint').value = '/assets/img/products/' + sku + '.webp';
+
+    const tags = tagsRaw
+      ? tagsRaw.split(',').map(s => slugify(s.trim())).filter(Boolean)
+      : [];
+
+    const productJson = {
+      sku,
+      title,
+      origin_url,
+      merchant,
+      img: '/assets/img/products/' + sku + '.webp',
+      price: price ? Number(price) : null,
+      price_old: price_old ? Number(price_old) : null,
+      categories: [category],
+      tags,
+      description
+    };
+
+    const jsonOutput = JSON.stringify(productJson, null, 2);
+
+    const htmlOutput =
+`<article class="product-card" data-sku="${sku}" data-category="${category}">
+  <a href="/g.html?sku=${sku}">
+    <div class="thumb">
+      <img src="/assets/img/products/${sku}.webp" alt="${escapeHtml(title)}" loading="lazy" width="400" height="400"/>
+    </div>
+    <h3>${escapeHtml(title)}</h3>
+    <div class="price-row">
+      ${price ? `<span class="price">${formatPrice(price)}₫</span>` : ''}
+      ${price_old ? `<span class="price-old">${formatPrice(price_old)}₫</span>` : ''}
+    </div>
+  </a>
+</article>`;
+
+    document.getElementById('json_output').value = jsonOutput;
+    document.getElementById('html_output').value = htmlOutput;
+  }
+
+  function resetForm(){
+    document.getElementById('title').value = '';
+    document.getElementById('origin_url').value = '';
+    document.getElementById('merchant').value = '';
+    document.getElementById('category').value = '';
+    document.getElementById('price').value = '';
+    document.getElementById('price_old').value = '';
+    document.getElementById('tags').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('img_hint').value = '/assets/img/products/<sku>.webp';
+    document.getElementById('json_output').value = '';
+    document.getElementById('html_output').value = '';
+  }
+
+  function escapeHtml(str){
+    return (str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function formatPrice(v){
+    const n = Number(v || 0);
+    if(!n) return '0';
+    return n.toLocaleString('vi-VN');
+  }
+</script>
+</body>
+</html>
