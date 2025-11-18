@@ -17,6 +17,58 @@
 <script defer src="/assets/js/analytics.js"></script>
 <script defer src="/assets/js/mxd-affiliate.js"></script>
 <link rel="stylesheet" href="/assets/site.css"/>
+
+<style>
+  /* Khối sản phẩm Bongstudio */
+  .product-section{margin-top:32px;}
+  .product-toolbar{
+    display:flex;gap:8px;flex-wrap:wrap;
+    align-items:center;justify-content:space-between;
+    margin-bottom:8px;
+  }
+  .product-toolbar .search{flex:1;min-width:180px;}
+  .product-toolbar input,
+  .product-toolbar select{
+    width:100%;padding:8px 10px;
+    border-radius:999px;border:1px solid #dde1ea;
+    font-size:13px;
+  }
+  .product-card{
+    background:#fff;border:1px solid #e5e7eb;
+    border-radius:12px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .product-card a.thumb{display:block;line-height:0;}
+  .product-card img{
+    width:100%;height:220px;object-fit:cover;display:block;
+  }
+  .product-card-body{
+    padding:10px 12px;
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .product-card-title{
+    font-size:14px;font-weight:600;line-height:1.4;margin:0;
+  }
+  .product-card-meta{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;margin-top:4px;
+  }
+  .product-price{font-weight:700;color:#d32f2f;}
+  .product-brand{color:#6b7280;font-size:12px;}
+  .product-actions{
+    margin-top:8px;display:flex;justify-content:flex-end;
+  }
+  .btn-buy{
+    display:inline-block;padding:8px 12px;
+    border-radius:999px;font-size:13px;
+    text-decoration:none;background:#2563eb;color:#fff;
+  }
+  .btn-buy:hover{filter:brightness(0.97);}
+  .product-status{margin:4px 0 10px;font-size:12px;color:#6b7280;}
+  @media (prefers-color-scheme: dark){
+    .product-card{background:#0f172a;border-color:#1f2937;}
+  }
+</style>
 </head>
 <body>
 <header class="top"><div class="inner container">
@@ -26,10 +78,12 @@
     <a href="/store.html">Cửa hàng</a>
   </nav>
 </div></header>
+
 <div class="container">
   <h1>Cửa hàng</h1>
   <p class="small">Chọn danh mục bên dưới để đi nhanh tới nhóm sản phẩm đúng “tệp” của bạn.</p>
 
+  <!-- Lưới danh mục điều hướng -->
   <div class="grid cards" style="margin-top:16px">
     <!-- Gia dụng, decor nhà cửa -->
     <a class="category-tile" href="/cat-gia-dung-decor-nha-cua.html">
@@ -80,6 +134,33 @@
       <span>Đồ ăn</span>
     </a>
   </div>
+
+  <!-- Khối sản phẩm đọc từ /assets/json/bongstudio/*.json -->
+  <section class="product-section">
+    <h2>Sản phẩm nổi bật từ Bongstudio</h2>
+
+    <div class="product-toolbar">
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Tìm theo tên / thương hiệu…"/>
+      </div>
+      <div style="width:180px;max-width:100%">
+        <select id="catFilter">
+          <option value="">Tất cả danh mục</option>
+          <option value="gia-dung-decor">Gia dụng, decor nhà cửa</option>
+          <option value="thoi-trang-nu">Thời trang nữ</option>
+          <option value="thoi-trang-nam">Thời trang nam</option>
+          <option value="quan-ao-em-be">Quần áo em bé</option>
+          <option value="suc-khoe-tpcn">Sức khoẻ, TPCN</option>
+          <option value="sach">Sách</option>
+          <option value="do-an">Đồ ăn</option>
+          <option value="khac">Khác</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="productStatus" class="product-status"></div>
+    <div id="productGrid" class="grid cards"></div>
+  </section>
 </div>
 
 <div class="container footer small">
@@ -90,7 +171,198 @@
   <a href="https://zalo.me/0978557797" target="_blank" rel="noopener"><img class="icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='black'><circle cx='12' cy='12' r='10'/></svg>'/><span>Zalo</span></a>
   <a href="https://www.facebook.com/profile.php?id=100050291345045" target="_blank" rel="noopener"><img class="icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='black'><path d='M10 9h2V7c0-1.1.9-2 2-2h2v3h-2v2h2l-.5 3h-1.5v6h-3v-6H10V9z'/></svg>'/><span>Facebook</span></a>
 </div>
+
 <script>
   if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js'); }
 </script>
-</body></html>
+
+<script>
+(function(){
+  const API_LIST = "https://api.github.com/repos/bongstudio68/bongstudio68.github.io/contents/assets/json/bongstudio";
+  const grid = document.getElementById("productGrid");
+  const statusEl = document.getElementById("productStatus");
+  const searchInput = document.getElementById("searchInput");
+  const catFilter = document.getElementById("catFilter");
+
+  const CAT_LABELS = {
+    "gia-dung-decor": "Gia dụng, decor nhà cửa",
+    "thoi-trang-nu": "Thời trang nữ",
+    "thoi-trang-nam": "Thời trang nam",
+    "quan-ao-em-be": "Quần áo em bé",
+    "suc-khoe-tpcn": "Sức khoẻ, TPCN",
+    "sach": "Sách",
+    "do-an": "Đồ ăn",
+    "khac": "Khác"
+  };
+
+  let allProducts = [];
+
+  function escapeHtml(str){
+    return String(str || "").replace(/[&<>"']/g, function(ch){
+      return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;" })[ch];
+    });
+  }
+
+  function formatPrice(p){
+    const n = Number(p || 0);
+    if(!n) return "Liên hệ";
+    return n.toLocaleString("vi-VN") + "₫";
+  }
+
+  function normalizeProduct(raw){
+    if(!raw || typeof raw !== "object") return null;
+    return {
+      name: raw.name || "",
+      sku: raw.sku || "",
+      price_vnd: raw.price_vnd || raw.price || 0,
+      origin_url: raw.origin_url || raw.origin || "",
+      deeplink: raw.deeplink || "",
+      merchant: (raw.merchant || "").toLowerCase() || "shopee",
+      image: raw.image || "",
+      category: raw.category || "khac",
+      brand: raw.brand || "",
+      featured: !!raw.featured,
+      status: (typeof raw.status === "boolean") ? raw.status : true,
+      updated_at: raw.updated_at || raw.updatedAt || ""
+    };
+  }
+
+  function render(list){
+    if(!grid) return;
+    if(!list.length){
+      grid.innerHTML = "<p class='small'>Chưa có sản phẩm phù hợp. Thử đổi từ khoá hoặc danh mục khác nhé.</p>";
+      return;
+    }
+    const html = list.map(function(p){
+      const name = escapeHtml(p.name || "");
+      const brand = escapeHtml(p.brand || "");
+      const catLabel = CAT_LABELS[p.category] || p.category || "";
+      const priceText = formatPrice(p.price_vnd);
+      const img = p.image || "/assets/img/categories/thoi-trang.webp";
+      const origin = p.origin_url || "#";
+      const href = p.deeplink || origin;
+      const sku = escapeHtml(p.sku || "");
+      const merchant = escapeHtml(p.merchant || "");
+
+      return (
+        "<article class=\"product-card\""+
+        " data-sku=\"" + sku + "\"" +
+        " data-merchant=\"" + merchant + "\"" +
+        " data-origin=\"" + escapeHtml(origin) + "\"" +
+        ">" +
+          "<a class=\"thumb\" href=\"" + href + "\" target=\"_blank\" rel=\"nofollow noopener\">" +
+            "<img loading=\"lazy\" src=\"" + escapeHtml(img) + "\" alt=\"" + name + "\"/>" +
+          "</a>" +
+          "<div class=\"product-card-body\">" +
+            "<h3 class=\"product-card-title\">" + name + "</h3>" +
+            "<div class=\"product-card-meta\">" +
+              "<span class=\"product-price\">" + priceText + "</span>" +
+              "<span class=\"product-brand\">" +
+                (brand ? brand : (catLabel ? catLabel : "")) +
+              "</span>" +
+            "</div>" +
+            "<div class=\"product-actions\">" +
+              "<a class=\"btn-buy\" href=\"" + href + "\"" +
+                " data-origin=\"" + escapeHtml(origin) + "\"" +
+                " data-merchant=\"" + merchant + "\"" +
+                " data-sku=\"" + sku + "\"" +
+                " target=\"_blank\" rel=\"nofollow noopener\">" +
+                "Xem / Mua" +
+              "</a>" +
+            "</div>" +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+    grid.innerHTML = html;
+
+    // Nếu mxd-affiliate.js có hook riêng thì cố gắng gọi nhẹ
+    try{
+      if(window.MXD_AFF && typeof window.MXD_AFF.scan === "function"){
+        window.MXD_AFF.scan();
+      }
+    }catch(_){}
+  }
+
+  function applyFilters(){
+    let list = allProducts.slice();
+    const q = (searchInput && searchInput.value || "").trim().toLowerCase();
+    const cat = catFilter && catFilter.value || "";
+
+    if(cat){
+      list = list.filter(function(p){ return (p.category || "") === cat; });
+    }
+    if(q){
+      list = list.filter(function(p){
+        const name = (p.name || "").toLowerCase();
+        const brand = (p.brand || "").toLowerCase();
+        return name.indexOf(q) !== -1 || brand.indexOf(q) !== -1;
+      });
+    }
+    render(list);
+  }
+
+  async function loadProducts(){
+    if(!grid || !statusEl) return;
+    statusEl.textContent = "Đang tải sản phẩm từ Bongstudio…";
+    try{
+      const res = await fetch(API_LIST + "?_=" + Date.now());
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      const files = await res.json();
+      const jsonFiles = (files || []).filter(function(f){
+        return f && f.type === "file" && /\.json$/i.test(f.name || "");
+      });
+      if(!jsonFiles.length){
+        statusEl.textContent = "Chưa có sản phẩm nào được đăng bằng tool Bongstudio.";
+        grid.innerHTML = "";
+        return;
+      }
+
+      const products = [];
+      for(const f of jsonFiles){
+        try{
+          const r = await fetch((f.download_url || "") + "?_=" + Date.now());
+          if(!r.ok) continue;
+          const data = await r.json();
+          const p = normalizeProduct(data);
+          if(p && p.status !== false && p.origin_url){
+            products.push(p);
+          }
+        }catch(e){
+          console.error("Lỗi đọc file JSON:", f && f.name, e);
+        }
+      }
+      allProducts = products;
+      statusEl.textContent = "";
+      applyFilters();
+    }catch(e){
+      console.error(e);
+      statusEl.textContent = "Không tải được danh sách sản phẩm. Thử tải lại trang giúp mình.";
+    }
+  }
+
+  function initFiltersFromQuery(){
+    const usp = new URLSearchParams(window.location.search || "");
+    const cat = usp.get("cat");
+    if(cat && catFilter){
+      catFilter.value = cat;
+    }
+  }
+
+  function init(){
+    initFiltersFromQuery();
+    if(searchInput){
+      searchInput.addEventListener("input", function(){ applyFilters(); });
+    }
+    if(catFilter){
+      catFilter.addEventListener("change", function(){ applyFilters(); });
+    }
+    loadProducts();
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html>
