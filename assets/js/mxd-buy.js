@@ -1,3 +1,4 @@
+// REPLACE WHOLE FILE: /assets/js/mxd-buy.js
 ;(() => {
   // Base AccessTrade cho Bongstudio
   const AFF_BASE = {
@@ -13,8 +14,11 @@
 
   function makeIsclixUrl(originUrl, merchant, sku) {
     if (!originUrl) return "";
+    merchant = (merchant || "shopee").toLowerCase();
+
     const base = AFF_BASE[merchant] || "";
-    if (!base) return originUrl; // không có base thì bắn thẳng link gốc
+    // Nếu chưa cấu hình base cho merchant thì cho đi thẳng link gốc
+    if (!base) return originUrl;
 
     const sep = base.includes("?") ? "&" : "?";
     const head = base + sep + "url=" + encodeURIComponent(originUrl);
@@ -27,65 +31,47 @@
     return head + "&" + params.join("&");
   }
 
-  // Tìm data-* trên nút hoặc thẻ cha
-  function findData(el, key) {
+  function getDataset(el, key) {
     if (!el) return "";
     if (el.dataset && el.dataset[key]) return el.dataset[key];
     const parent = el.closest("[data-" + key + "]");
-    return parent && parent.dataset ? parent.dataset[key] || "" : "";
+    if (parent && parent.dataset && parent.dataset[key]) return parent.dataset[key];
+    return "";
   }
 
   function getOrigin(btn) {
-    // Ưu tiên data-origin / data-origin-url
-    const fromData = findData(btn, "origin") || findData(btn, "originUrl");
+    const fromData =
+      getDataset(btn, "origin") ||
+      getDataset(btn, "originUrl");
     if (fromData) return fromData;
 
-    // Fallback: lấy luôn href nếu là link tuyệt đối http/https
     const href = btn.getAttribute("href") || "";
     if (/^https?:\/\//i.test(href)) return href;
 
     return "";
   }
 
-  function getMerchant(btn) {
-    const m =
-      (findData(btn, "merchant") || "").toLowerCase().trim();
-    if (m) return m;
-    return "shopee";
-  }
-
-  function getSku(btn) {
-    return (
-      findData(btn, "sku") ||
-      findData(btn, "id") ||
-      btn.getAttribute("data-sku") ||
-      ""
-    );
-  }
-
-  function handleClick(e) {
-    // Bắt TẤT CẢ các nút trong khối sản phẩm
+  function clickHandler(e) {
     const btn = e.target.closest(
-      "#productGrid a, .js-mxd-buy, .js-buy-btn, .btn-buy, [data-role='buy-button']"
+      ".btn-buy, .js-mxd-buy, .js-buy-btn, [data-role='buy-button']"
     );
     if (!btn) return;
 
     const origin = getOrigin(btn);
     if (!origin) {
-      // Không có link gốc thì thôi, cho nó đi theo href mặc định
+      // Không biết link gốc → cho đi theo href mặc định
       return;
     }
 
-    e.preventDefault();
-
-    const merchant = getMerchant(btn);
-    const sku = getSku(btn);
+    const merchant = (getDataset(btn, "merchant") || "shopee").toLowerCase();
+    const sku = getDataset(btn, "sku") || getDataset(btn, "id") || "";
 
     const finalUrl = makeIsclixUrl(origin, merchant, sku);
     if (!finalUrl) return;
 
+    e.preventDefault();
     window.open(finalUrl, "_blank", "noopener,noreferrer");
   }
 
-  document.addEventListener("click", handleClick, false);
+  document.addEventListener("click", clickHandler, false);
 })();
