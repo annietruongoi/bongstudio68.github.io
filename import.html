@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
+  <title>Bongstudio • Trung tâm công cụ</title>
+  <meta name="description" content="Trung tâm công cụ Bongstudio: tạo JSON + ảnh sản phẩm và gửi lên repo qua Worker."/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="canonical" href="https://bongstudio68.github.io/import.html"/>
+  <style>
+    :root{
+      --bg:#020617;
+      --fg:#e5e7eb;
+      --muted:#9ca3af;
+      --card:#020817;
+      --border:#1f2937;
+      --accent:#7c3aed;
+      --accent-soft:rgba(124,58,237,.16);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#111827 0,#020617 55%,#020308 100%);
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+    }
+    .wrap{
+      max-width:880px;
+      margin:0 auto;
+      padding:16px;
+    }
+    h1{
+      font-size:1.5rem;
+      margin:0 0 4px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .sub{
+      font-size:.9rem;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    @media(max-width:768px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      border:1px solid var(--border);
+      padding:14px 14px 12px;
+      box-shadow:0 18px 45px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:radial-gradient(circle at top right,rgba(124,58,237,.32),transparent 55%);
+      opacity:.7;
+      pointer-events:none;
+    }
+    .card-inner{position:relative;z-index:1;}
+    .tag{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:.7rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      background:var(--accent-soft);
+      color:var(--accent);
+      border:1px solid rgba(124,58,237,.6);
+      margin-bottom:6px;
+    }
+    .title{
+      font-size:1rem;
+      font-weight:600;
+      margin-bottom:4px;
+    }
+    .desc{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 14px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:.8rem;
+      font-weight:600;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      background:linear-gradient(135deg,#4f46e5,#7c3aed);
+      color:#f9fafb;
+      box-shadow:0 12px 28px rgba(17,24,39,.8);
+      border:1px solid rgba(129,140,248,.7);
+      transition:transform .1s,box-shadow .1s,opacity .1s;
+      margin-top:2px;
+    }
+    a.btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 16px 40px rgba(15,23,42,.9);
+    }
+    a.btn:active{
+      transform:translateY(0);
+      box-shadow:0 9px 22px rgba(15,23,42,.8);
+    }
+    .step{
+      font-size:.8rem;
+      color:var(--muted);
+      margin-top:4px;
+    }
+    .footer{
+      margin-top:14px;
+      font-size:.75rem;
+      color:var(--muted);
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Trung tâm công cụ Bongstudio</h1>
+  <div class="sub">
+    Quy trình chuẩn: <b>Bước 1</b> tạo JSON + ảnh từ link sản phẩm → <b>Bước 2</b> gửi JSON + ảnh sang Worker để đẩy lên repo.
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-inner">
+        <div class="tag">Bước 1</div>
+        <div class="title">Tạo JSON + HTML + ảnh (Product Builder)</div>
+        <div class="desc">
+          Dán link sản phẩm từ Shopee/Lazada/TikTok/Tiki, nhập tên + giá → tool sinh
+          JSON, HTML card, poster share và WebP thumb để up repo.
+        </div>
+        <a class="btn" href="/tools/bongstudio-tool.html">
+          Mở Bongstudio Product Builder
+        </a>
+        <div class="step">
+          Gợi ý: làm xong 1 sản phẩm ở đây rồi chuyển sang bước 2 để đẩy lên repo tự động.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="tag">Bước 2</div>
+        <div class="title">Gửi JSON + ảnh sang Worker (Worker Bridge)</div>
+        <div class="desc">
+          Dán JSON từ Bước 1 + chọn WebP thumb đã tải về → Worker nhận JSON/ảnh
+          và commit thẳng vào repo <code>bongstudio68.github.io</code>.
+        </div>
+        <a class="btn" href="/tools/bongstudio-worker-bridge.html">
+          Mở Bongstudio Worker Bridge
+        </a>
+        <div class="step">
+          Cần cấu hình trước: URL Worker, repo, thư mục <code>assets/json/bongstudio</code> và <code>assets/img/bongstudio</code>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Đây là trang nội bộ dành cho MXD/Bongstudio — không index trên Google, chỉ dùng để thao tác tool nhanh trên PC/điện thoại.
+  </div>
+</div>
+</body>
+</html>
