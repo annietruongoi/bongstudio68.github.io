@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Bongstudio Importer v4.3.9 — PRO + Batch + Featured + Debug</title>
+  <title>bongstudio-tool.v2 — PRO + Batch + Featured + Debug</title>
   <meta name="robots" content="noindex,follow"/>
   <style>
     :root{
@@ -277,7 +277,7 @@
     <div class="row" style="margin-top:8px">
       <button class="btn" id="btnToJson">Tạo JSON</button>
       <button class="btn" id="btnCopyJson">Copy JSON</button>
-      <button class="btn" id="btnDownloadJson">Tải bongstudio-product.json</button>
+<button class="btn" id="btnDownloadJson">Tải bongstudio-products.json</button>
     </div>
   </div>
 
@@ -313,8 +313,8 @@ function initImporter() {
     return (m?m[1]:'mxd').replace(/[^a-z0-9-]/g,'')||'mxd';
   })();
 
-  /* JSON base cho Bongstudio */
-  const JSON_BASE = "/assets/json/bongstudio/";
+   /* Đường dẫn kho JSON chính cho Bongstudio (kho sản phẩm chung) */
+  const PRODUCTS_JSON_PATH = "/assets/data/bongstudio-products.json";
 
   document.title = `${SITE_ID} Importer v4.3.9 — PRO + Batch + Featured + Debug`;
   const titleEl=$("#title");
@@ -1217,20 +1217,49 @@ function initImporter() {
     document.execCommand('copy');
     toast("Đã copy JSON.");
   };
-  $("#btnDownloadJson").onclick=()=>{
-    if(!$("#jsonOut").value) buildJson();
-    const objText=$("#jsonOut").value || "{}";
-    const sku=($("#sku").value||'product').trim() || 'product';
-    const blob=new Blob([objText],{type:"application/json"});
+    $("#btnDownloadJson").onclick=async()=>{
+    const obj = buildJson();                     // JSON 1 sản phẩm hiện tại
+    const listOld = await loadProductsJson();    // đọc kho cũ (nếu có)
+    const list = upsertProduct(listOld, obj);    // upsert theo SKU
+
+    const blob=new Blob([JSON.stringify(list,null,2)],{type:"application/json"});
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download=`${slugify(sku)}.json`;
+    a.download="bongstudio-products.json";
     a.click();
   };
+  async function loadProductsJson(){
+    try{
+      const r = await fetch(PRODUCTS_JSON_PATH + '?_=' + Date.now(), { cache: 'no-cache' });
+      if(!r.ok){
+        log(`[loadProductsJson] ${r.status} — chưa có kho, sẽ tạo file mới.`);
+        return [];
+      }
+      const data = await r.json().catch(()=>null);
+      if(!data) return [];
+      if(Array.isArray(data)) return data;
+      if(Array.isArray(data.items)) return data.items;
+      if(Array.isArray(data.products)) return data.products;
+      return [];
+    }catch(e){
+      log("[loadProductsJson] Lỗi: "+e.message);
+      return [];
+    }
+  }
 
+  function upsertProduct(list, obj){
+    const skuSlug = slugify(obj.sku || '');
+    if(!skuSlug) return list;
+    const idx = list.findIndex(p => slugify(p.sku || '') === skuSlug);
+    if(idx >= 0){
+      list[idx] = { ...list[idx], ...obj };
+    } else {
+      list.push(obj);
+    }
+    return list;
+  }
   $("#btnPublish").onclick=()=>doPublish(false);
   $("#btnPublishFeatured").onclick=()=>doPublish(true);
-
   async function doPublish(forceFeatured){
     const obj=buildJson();
     if(forceFeatured){
@@ -1247,6 +1276,7 @@ function initImporter() {
       return;
     }
 
+    // đảm bảo có deeplink, ưu tiên auto từ template
     if(!$("#deeplink").value.trim()){
       const maybe=activeTplFor($("#merchant").value);
       if(maybe){
@@ -1262,16 +1292,17 @@ function initImporter() {
         return;
       }
     }
-
+    // luôn merge với kho JSON hiện tại
+    const listOld = await loadProductsJson();
+    const list = upsertProduct(listOld, obj);
     const b=baseUrl();
-    const skuSlug = slugify(obj.sku || 'product');
-    const path = (JSON_BASE + skuSlug + ".json").replace(/\/+/g,'/');
 
+    // Nếu có Worker → commit thẳng bongstudio-products.json
     if(b){
       try{
         const payload = {
-          path,
-          content: obj,
+          path: PRODUCTS_JSON_PATH,
+          content: list,
           note: `feat(product): upsert ${obj.sku} via bongstudio importer`
         };
         const r=await fetch(b+"/git/json",{
@@ -1280,45 +1311,58 @@ function initImporter() {
           body:JSON.stringify(payload)
         });
         const text=await r.text().catch(()=>'' );
-        log(`[git/json ${path}] ${r.status} ${r.ok?'OK':'FAIL'} — ${text.slice(0,200)}`);
+        log(`[git/json ${PRODUCTS_JSON_PATH}] ${r.status} ${r.ok?'OK':'FAIL'} — ${text.slice(0,200)}`);
         if(!r.ok) throw new Error('HTTP '+r.status);
-        toast("Publish OK → đã lưu JSON lên repo"+(obj.featured?" + gắn nổi bật":"."),"ok");
+        toast("Publish OK → đã lưu vào kho bongstudio-products.json"+(obj.featured?" + gắn nổi bật":"."),"ok");
         window.scrollTo({top:0,behavior:'smooth'});
         return;
       }catch(e){
-        toast("Publish lỗi (sẽ tải JSON để commit tay): "+e.message,"err");
+        toast("Publish lỗi (sẽ tải kho JSON để commit tay): "+e.message,"err");
       }
     }
-
-    // fallback: tải về file JSON để commit tay
-    const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
+    // fallback: tải về toàn bộ kho để commit tay
+    const blob=new Blob([JSON.stringify(list,null,2)],{type:"application/json"});
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download= skuSlug + '.json';
+    a.download="bongstudio-products.json";
     a.click();
   }
-
-  /* Verify JSON trên repo */
-  $("#btnVerify").onclick=async()=>{
+/* Verify JSON trên repo */
+    $("#btnVerify").onclick=async()=>{
     const rawSku=$("#sku").value.trim();
     if(!rawSku){
       toast("Chưa có SKU để kiểm tra.","warn");
       return;
     }
     const skuSlug = slugify(rawSku);
-    const path = (JSON_BASE + skuSlug + ".json").replace(/\/+/g,'/');
     try{
-      const r=await fetch(path+'?_='+Date.now(),{cache:'no-cache'});
-      if(r.ok){
-        toast(`ĐÃ CÓ file JSON: ${path}`,"ok");
+      const r=await fetch(PRODUCTS_JSON_PATH+'?_='+Date.now(),{cache:'no-cache'});
+      if(!r.ok){
+        toast(`CHƯA THẤY kho JSON (${r.status}): ${PRODUCTS_JSON_PATH}`,"warn");
+        return;
+      }
+      const data=await r.json().catch(()=>null);
+      if(!data){
+        toast("Dữ liệu kho JSON không hợp lệ.","err");
+        return;
+      }
+      let list;
+      if(Array.isArray(data)) list=data;
+      else if(Array.isArray(data.items)) list=data.items;
+      else if(Array.isArray(data.products)) list=data.products;
+      else list=[];
+
+      const found=list.find(p=>slugify(p.sku||'')===skuSlug);
+      if(found){
+        toast(`ĐÃ TÌM THẤY SKU ${skuSlug} trong kho JSON.`,"ok");
       } else {
-        toast(`CHƯA THẤY file JSON (${r.status}): ${path}`,"warn");
+        toast(`Kho JSON đã tải được nhưng CHƯA thấy SKU ${skuSlug}.`,"warn");
       }
     }catch(e){
-      toast(`Không đọc được ${path}: `+e.message,"err");
+      toast("Không đọc được kho JSON: "+e.message,"err");
     }
   };
-
+  
   /* Commit message generator */
   $("#btnGenCommit").onclick=()=>{
     const sku = ($("#sku").value||'').trim();
