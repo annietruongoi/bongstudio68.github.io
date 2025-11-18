@@ -1,5 +1,5 @@
 
-const VERSION = 'v2025-11-13-bongstudio';
+const VERSION = 'v2025-11-18-v5-bongstudio';
 self.addEventListener('install',e=>{self.skipWaiting()});
 self.addEventListener('activate',e=>{clients.claim()});
 const isHTML = url => url.endsWith('.html') || url.endsWith('/');
