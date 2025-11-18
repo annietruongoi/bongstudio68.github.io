@@ -1,98 +1,165 @@
-;(() => {
-  const grid = document.querySelector('#homeFeaturedGrid');
-  const statusEl = document.querySelector('#homeFeaturedStatus');
+// NEW FILE: /assets/js/index-bongstudio.js
+// Load sản phẩm từ assets/json/bongstudio/*.json và render block "Sản phẩm nổi bật" trên trang chủ
 
-  // Nếu không có khối này (ví dụ trang khác) thì bỏ qua
-  if (!grid) return;
+(function(){
+  const API_LIST = "https://api.github.com/repos/bongstudio68/bongstudio68.github.io/contents/assets/json/bongstudio";
+  const grid = document.getElementById("homeFeaturedGrid");
+  const statusEl = document.getElementById("homeFeaturedStatus");
 
-  // ⚠️ QUAN TRỌNG:
-  // Đổi JSON_URL này thành đúng đường dẫn mà store-bongstudio.js đang fetch.
-  // Ví dụ: '/assets/json/bongstudio/products.json'
-  const JSON_URL = '/assets/json/bongstudio/products.json';
+  if(!grid || !statusEl) return; // Trang khác thì bỏ qua
 
-  function formatPrice(value) {
-    if (!value && value !== 0) return '';
-    const n = Number(value);
-    if (Number.isNaN(n)) return String(value);
-    return n.toLocaleString('vi-VN') + '₫';
+  const CAT_LABELS = {
+    "gia-dung-decor": "Gia dụng, decor nhà cửa",
+    "thoi-trang-nu": "Thời trang nữ",
+    "thoi-trang-nam": "Thời trang nam",
+    "quan-ao-em-be": "Quần áo em bé",
+    "suc-khoe-tpcn": "Sức khoẻ, TPCN",
+    "sach": "Sách",
+    "do-an": "Đồ ăn",
+    "khac": "Khác"
+  };
+
+  function escapeHtml(str){
+    return String(str || "").replace(/[&<>"']/g, function(ch){
+      return ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        "\"":"&quot;",
+        "'":"&#39;"
+      })[ch];
+    });
   }
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+  function formatPrice(p){
+    const n = Number(p || 0);
+    if(!n) return "Liên hệ";
+    return n.toLocaleString("vi-VN") + "₫";
   }
 
-  function renderCard(p) {
-    const name = escapeHtml(p.name || p.title || '');
-    const img = escapeHtml(
-      p.image ||
-      p.img ||
-      '/assets/img/placeholder-product.webp'
-    );
-    const price = formatPrice(p.price || p.final_price || p.sale_price);
-    const brand = escapeHtml(p.brand || p.shop || '');
-    const origin = escapeHtml(p.origin || p.origin_url || '');
-    const merchant = (p.merchant || 'shopee').toLowerCase();
-    const sku = escapeHtml(p.sku || p.id || '');
-
-    return `
-<article class="product-card"
-         data-origin="${origin}"
-         data-merchant="${merchant}"
-         data-sku="${sku}">
-  <a class="thumb" href="${origin}" target="_blank" rel="nofollow noopener">
-    <img src="${img}" alt="${name}"/>
-  </a>
-  <div class="product-card-body">
-    <h3 class="product-card-title">${name}</h3>
-    <div class="product-card-meta">
-      <span class="product-price">${price}</span>
-      <span class="product-brand">${brand}</span>
-    </div>
-    <div class="product-actions">
-      <a href="${origin}" class="btn-buy js-mxd-buy">Xem / Mua</a>
-    </div>
-  </div>
-</article>`;
+  function normalizeProduct(raw){
+    if(!raw || typeof raw !== "object") return null;
+    return {
+      name: raw.name || "",
+      sku: raw.sku || "",
+      price_vnd: raw.price_vnd || raw.price || 0,
+      origin_url: raw.origin_url || raw.origin || "",
+      deeplink: raw.deeplink || "",
+      merchant: (raw.merchant || "").toLowerCase() || "shopee",
+      image: raw.image || "",
+      category: raw.category || "khac",
+      brand: raw.brand || "",
+      featured: !!raw.featured,
+      status: (typeof raw.status === "boolean") ? raw.status : true,
+      updated_at: raw.updated_at || raw.updatedAt || ""
+    };
   }
 
-  function isFeatured(p) {
-    // Chấp nhận nhiều kiểu flag cho chắc
-    if (p.featured === true || p.featured === 1 || p.featured === '1') return true;
-    if (p.home === true || p.homepage === true) return true;
-    return false;
+  function render(list){
+    if(!list.length){
+      statusEl.textContent = "Sản phẩm nổi bật đang được bổ sung.";
+      grid.innerHTML = "";
+      return;
+    }
+
+    const html = list.map(function(p){
+      const name = escapeHtml(p.name || "");
+      const brand = escapeHtml(p.brand || "");
+      const catLabel = CAT_LABELS[p.category] || p.category || "";
+      const priceText = formatPrice(p.price_vnd);
+      const img = p.image || "/assets/img/categories/thoi-trang.webp";
+      const origin = p.origin_url || "#";
+      const href = origin;
+      const sku = escapeHtml(p.sku || "");
+      const merchant = escapeHtml(p.merchant || "");
+
+      return (
+        "<article class=\"product-card\"" +
+        " data-sku=\"" + sku + "\"" +
+        " data-merchant=\"" + merchant + "\"" +
+        " data-origin=\"" + escapeHtml(origin) + "\"" +
+        ">" +
+          "<a class=\"thumb\" href=\"" + href + "\" target=\"_blank\" rel=\"nofollow noopener\">" +
+            "<img loading=\"lazy\" src=\"" + escapeHtml(img) + "\" alt=\"" + name + "\"/>" +
+          "</a>" +
+          "<div class=\"product-card-body\">" +
+            "<h3 class=\"product-card-title\">" + name + "</h3>" +
+            "<div class=\"product-card-meta\">" +
+              "<span class=\"product-price\">" + priceText + "</span>" +
+              "<span class=\"product-brand\">" +
+                (brand ? brand : (catLabel ? catLabel : "")) +
+              "</span>" +
+            "</div>" +
+            "<div class=\"product-actions\">" +
+              "<a class=\"btn-buy\" href=\"" + href + "\"" +
+                " data-origin=\"" + escapeHtml(origin) + "\"" +
+                " data-merchant=\"" + merchant + "\"" +
+                " data-sku=\"" + sku + "\"" +
+                " target=\"_blank\" rel=\"nofollow noopener\">" +
+                "Xem / Mua" +
+              "</a>" +
+            "</div>" +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+
+    grid.innerHTML = html;
+
+    // Nếu MXD_AFF có scan thì gọi
+    try{
+      if(window.MXD_AFF && typeof window.MXD_AFF.scan === "function"){
+        window.MXD_AFF.scan();
+      }
+    }catch(_){}
   }
 
-  async function load() {
-    try {
-      statusEl.textContent = 'Đang tải sản phẩm…';
+  async function loadFeatured(){
+    statusEl.textContent = "Đang tải sản phẩm nổi bật…";
+    try{
+      const res = await fetch(API_LIST + "?_=" + Date.now());
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      const files = await res.json();
+      const jsonFiles = (files || []).filter(function(f){
+        return f && f.type === "file" && /\.json$/i.test(f.name || "");
+      });
 
-      const res = await fetch(JSON_URL, { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-
-      const list = Array.isArray(data) ? data : data.items || data.products || [];
-
-      const featured = list.filter(isFeatured);
-      if (!featured.length) {
-        statusEl.textContent = 'Sản phẩm nổi bật đang được bổ sung.';
+      if(!jsonFiles.length){
+        statusEl.textContent = "Chưa có sản phẩm nào được đăng bằng tool Bongstudio.";
+        grid.innerHTML = "";
         return;
       }
 
-      // Lấy tối đa 8 sản phẩm
-      const top = featured.slice(0, 8);
-      grid.innerHTML = top.map(renderCard).join('');
-      statusEl.textContent = '';
-    } catch (err) {
-      console.error('[home-products] Lỗi tải JSON', err);
-      statusEl.textContent = 'Không tải được danh sách sản phẩm.';
+      const products = [];
+      for(const f of jsonFiles){
+        try{
+          const r = await fetch((f.download_url || "") + "?_=" + Date.now());
+          if(!r.ok) continue;
+          const data = await r.json();
+          const p = normalizeProduct(data);
+          if(p && p.status !== false && p.origin_url){
+            products.push(p);
+          }
+        }catch(e){
+          console.error("[home-featured] Lỗi đọc file JSON:", f && f.name, e);
+        }
+      }
+
+      // Ưu tiên featured; nếu chưa set featured thì lấy 8 sản phẩm đầu tiên
+      let list = products.filter(function(p){ return !!p.featured; });
+      if(!list.length){
+        list = products.slice(0, 8);
+      }else{
+        list = list.slice(0, 8);
+      }
+
+      statusEl.textContent = "";
+      render(list);
+    }catch(e){
+      console.error("[home-featured] Lỗi tải sản phẩm nổi bật:", e);
+      statusEl.textContent = "Không tải được sản phẩm nổi bật. Thử tải lại trang giúp mình.";
     }
   }
 
-  load();
+  loadFeatured();
 })();
