@@ -1,4 +1,3 @@
-<!-- NEW FILE: /category-suc-khoe-tpcn.html -->
 <!doctype html>
 <html lang="vi">
 <head>
@@ -32,7 +31,7 @@
   <!-- CSS chung -->
   <link rel="stylesheet" href="/assets/css/styles.css"/>
 
-  <!-- STYLE nhẹ, đồng bộ -->
+  <!-- STYLE -->
   <style>
     .container {
       max-width: 1120px;
@@ -117,6 +116,7 @@
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: .9rem;
       padding-bottom: 2.5rem;
+      min-height: 3rem;
     }
     .product-card {
       border-radius: 1rem;
@@ -150,7 +150,7 @@
     .product-name {
       font-size: .95rem;
       line-height: 1.4;
-      max-height: 2.8em; /* ~2 dòng */
+      max-height: 2.8em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -265,70 +265,16 @@
       </div>
     </section>
 
-    <!-- LƯỚI SẢN PHẨM: MẪU SỨC KHỎE/TPCN -->
+    <!-- LƯỚI SẢN PHẨM: RENDER TỪ JSON -->
     <section>
       <div class="container">
         <div class="home-section-head">
-          <h2>Sản phẩm sức khỏe & TPCN (bản test)</h2>
-          <p>Sau này kho sản phẩm & tool sẽ thay toàn bộ khối này bằng dữ liệu thật.</p>
+          <h2>Sản phẩm sức khỏe & TPCN</h2>
+          <p>Dữ liệu đang lấy từ kho JSON /assets/data/bongstudio-products.json (category: suc-khoe-tpcn).</p>
         </div>
 
-        <div class="product-grid">
-          <!-- CARD 1: Vitamin tổng hợp (Shopee placeholder) -->
-          <article class="product-card"
-                   data-sku="BS-SK-VIT-001"
-                   data-merchant="shopee"
-                   data-origin-url="https://shopee.vn/">
-            <a class="product-thumb" href="#vitamin-tong-hop" aria-label="Vitamin tổng hợp cho người lớn">
-              <img src="/assets/img/products/vitamin-tong-hop-nguoi-lon.webp"
-                   loading="lazy"
-                   alt="Lọ vitamin tổng hợp cho người lớn (minh họa)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Vitamin tổng hợp cho người lớn – Hỗ trợ bổ sung vi chất cơ bản mỗi ngày
-              </h3>
-              <div class="product-merchant">Nguồn: Shopee (placeholder, sau thay link thật)</div>
-              <div class="product-price">
-                <span class="product-price-current">189.000₫</span>
-                <span class="product-price-old">230.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary js-mxd-buy" type="button">
-                  Xem vitamin trên Shopee
-                </button>
-                <a class="btn-secondary" href="#vitamin-tong-hop">Chi tiết</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 2: Sữa bột bổ sung (Lazada placeholder) -->
-          <article class="product-card"
-                   data-sku="BS-SK-SUA-001"
-                   data-merchant="lazada"
-                   data-origin-url="https://www.lazada.vn/">
-            <a class="product-thumb" href="#sua-bo-sung" aria-label="Sữa bột bổ sung dinh dưỡng">
-              <img src="/assets/img/products/sua-bot-bo-sung.webp"
-                   loading="lazy"
-                   alt="Hộp sữa bột bổ sung dinh dưỡng (minh họa)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Sữa bột bổ sung dinh dưỡng – Phù hợp người cần thêm năng lượng, dễ uống
-              </h3>
-              <div class="product-merchant">Nguồn: Lazada (placeholder, sau thay link thật)</div>
-              <div class="product-price">
-                <span class="product-price-current">349.000₫</span>
-                <span class="product-price-old">399.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary js-mxd-buy" type="button">
-                  Xem sữa trên Lazada
-                </button>
-                <a class="btn-secondary" href="#sua-bo-sung">Chi tiết</a>
-              </div>
-            </div>
-          </article>
+        <div class="product-grid" data-category="suc-khoe-tpcn">
+          Đang tải sản phẩm...
         </div>
       </div>
     </section>
@@ -352,58 +298,7 @@
     </div>
   </footer>
 
-  <!-- SCRIPT ISCLIX: CHUẨN CHUNG TOÀN SITE -->
-  <script>
-    ;(function(){
-      const AFF_BASE = {
-        shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237",
-        lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578",
-        tiktok: "https://go.isclix.com/deep_link/6837508078414670452/6648523843406889655"
-      };
-
-      const UTM_BASE = "utm_source=" + encodeURIComponent(location.hostname) + "&utm_medium=affiliate";
-
-      function makeIsclixUrl(base, originUrl, sku, merchant){
-        if(!base || !originUrl) return originUrl;
-        const head = base + (base.includes("?") ? "&" : "?") + "url=" + encodeURIComponent(originUrl);
-        const params = [
-          UTM_BASE,
-          "utm_campaign=" + encodeURIComponent(merchant || ""),
-          "sub1=" + encodeURIComponent(sku || ""),
-          "sub2=" + encodeURIComponent(merchant || "")
-        ];
-        return head + "&" + params.join("&");
-      }
-
-      function wireCatCards(){
-        const cards = document.querySelectorAll(".product-card[data-origin-url][data-merchant]");
-        if(!cards.length) return;
-
-        cards.forEach(card => {
-          const sku = card.getAttribute("data-sku") || "";
-          const merchant = (card.getAttribute("data-merchant") || "").toLowerCase();
-          const origin = card.getAttribute("data-origin-url");
-          const base = AFF_BASE[merchant];
-          const btn = card.querySelector(".js-mxd-buy");
-          if(!btn) return;
-
-          const finalUrl = makeIsclixUrl(base, origin, sku, merchant);
-
-          btn.addEventListener("click", function(ev){
-            ev.preventDefault();
-            const urlToOpen = finalUrl || origin;
-            if(!urlToOpen) return;
-            window.open(urlToOpen, "_blank");
-          });
-        });
-      }
-
-      if(document.readyState === "loading"){
-        document.addEventListener("DOMContentLoaded", wireCatCards);
-      } else {
-        wireCatCards();
-      }
-    })();
-  </script>
+  <!-- TOOL RENDER + ISCLIX CHUNG -->
+  <script defer src="/assets/js/bongstudio-products.js"></script>
 </body>
 </html>
