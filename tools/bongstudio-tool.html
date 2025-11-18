@@ -1,10 +1,10 @@
-<!-- REPLACE WHOLE FILE: /tools/bongstudio-tool.html (hoặc đường dẫn đang dùng) -->
+<!-- REPLACE WHOLE FILE: /tools/bongstudio-tool.html -->
 <!doctype html>
 <html lang="vi">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
-  <title>Bongstudio Product Builder v1.2 — JSON + HTML + Poster + WebP</title>
+  <title>Bongstudio Product Builder v1.3 — JSON + HTML + Poster + WebP</title>
   <meta name="robots" content="noindex,follow"/>
   <style>
     :root{
@@ -189,8 +189,6 @@
       font-size:.8rem;
       color:var(--muted);
     }
-
-    /* Khối ảnh share */
     .share-layout{
       display:grid;
       grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);
@@ -219,10 +217,11 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>🔧 Bongstudio Product Builder v1.2</h1>
+  <h1>🔧 Bongstudio Product Builder v1.3</h1>
   <div class="sub">
     Nhập thông tin sản phẩm ➝ tool tự sinh <b>slug chuẩn</b>, block <b>JSON</b>, đoạn <b>HTML card</b>,  
-    <b>poster share</b> và <b>ảnh WebP</b> để up repo.
+    <b>poster share</b> và <b>ảnh WebP</b> để up repo.  
+    Giờ đã có thêm ô <b>đặt tên file ảnh khi tải về</b>.
   </div>
 
   <!-- KHỐI 1: INPUT THÔNG TIN -->
@@ -402,6 +401,11 @@
             <option value="story">Story 9:16 (1080×1920)</option>
           </select>
         </div>
+        <div class="row">
+          <label for="downloadName">Tên file khi tải về</label>
+          <input id="downloadName" placeholder="Nếu bỏ trống sẽ dùng SKU sản phẩm"/>
+          <div class="hint">Không cần ghi .png / .webp, tool sẽ tự thêm đuôi file. Tên sẽ được chuyển về dạng slug an toàn.</div>
+        </div>
         <div class="actions">
           <button type="button" id="btnRenderShare">Vẽ lại poster</button>
           <button type="button" id="btnDownloadShareWebp">Tải poster WebP</button>
@@ -422,7 +426,7 @@
   </div>
 
   <div class="footer">
-    Bongstudio Tool v1.2 — chạy hoàn toàn trên trình duyệt, không gọi API.  
+    Bongstudio Tool v1.3 — chạy hoàn toàn trên trình duyệt, không gọi API.  
     Bước sau: nối mạch với worker để publish JSON + ảnh lên repo tự động.
   </div>
 </div>
@@ -476,6 +480,15 @@
     return base + " Đang được phân phối trên " + m + ", theo dõi giá/ ưu đãi trực tiếp trên trang sản phẩm.";
   }
 
+  function getDownloadBaseName(data){
+    let base = $("downloadName") ? $("downloadName").value.trim() : "";
+    if(!base){
+      base = (data && data.sku) ? data.sku : "bongstudio";
+    }
+    base = slugify(base);
+    return base || "bongstudio";
+  }
+
   function buildJson(){
     const merchant = $("merchant").value;
     const originUrl = $("originUrl").value.trim();
@@ -523,12 +536,17 @@
       thumb: thumbUrl || null,
       short_desc: shortDesc,
       tags,
-      note: "Bongstudio Tool v1.2",
+      note: "Bongstudio Tool v1.3",
       created_at: created
     };
 
     $("statusJson").textContent = "JSON đã sinh xong (" + created + ").";
     $("statusJson").className = "badge-ok";
+
+    // Auto gợi ý tên file tải về = SKU nếu ô đang trống
+    if($("downloadName") && !$("downloadName").value){
+      $("downloadName").value = sku;
+    }
 
     return obj;
   }
@@ -578,6 +596,10 @@
       }else{
         $("shareBadge").value = "Ưu đãi theo thời điểm";
       }
+    }
+    // Nếu người dùng chưa chỉnh tên file => gợi ý theo SKU
+    if($("downloadName") && !$("downloadName").value){
+      $("downloadName").value = data.sku || "";
     }
   }
 
@@ -650,7 +672,6 @@
     canvas.height = h;
     const ctx = canvas.getContext("2d");
 
-    // Nền gradient
     const grad = ctx.createLinearGradient(0,0,w,h);
     grad.addColorStop(0,"#020617");
     grad.addColorStop(0.45,"#111827");
@@ -658,7 +679,6 @@
     ctx.fillStyle = grad;
     ctx.fillRect(0,0,w,h);
 
-    // Vùng glow tròn
     ctx.fillStyle = "rgba(96,165,250,0.35)";
     const centerX = w*0.72;
     const centerY = h*0.22;
@@ -667,7 +687,6 @@
     ctx.arc(centerX,centerY,radius,0,Math.PI*2);
     ctx.fill();
 
-    // Card chính
     const margin = w*0.08;
     const top = h*0.22;
     const cardW = w - margin*2;
@@ -684,7 +703,6 @@
     const innerX = margin + w*0.05;
     let textY = top + w*0.09;
 
-    // Vùng ảnh sản phẩm (nếu có)
     const imgBoxW = cardW*0.34;
     const imgBoxH = cardH*0.76;
     const imgBoxX = margin + cardW - imgBoxW - w*0.05;
@@ -713,14 +731,12 @@
       ctx.stroke();
     }
 
-    // Tag sàn + danh mục
     ctx.font = "500 " + Math.round(w*0.022) + "px system-ui";
     ctx.fillStyle = "#e5e7eb";
     const tag = merchantLabel(data.merchant) + " • " + (data.category || "");
     ctx.fillText(tag, innerX, textY);
     textY += w*0.04;
 
-    // Tiêu đề lớn
     ctx.font = "700 " + Math.round(w*0.045) + "px system-ui";
     ctx.fillStyle = "#f9fafb";
     const titleText = shareTitle || data.title;
@@ -728,7 +744,6 @@
     textY = wrapText(ctx, titleText, innerX, textY, textMaxWidth, w*0.055, 3);
     textY += w*0.03;
 
-    // Giá
     ctx.font = "700 " + Math.round(w*0.04) + "px system-ui";
     ctx.fillStyle = "#bfdbfe";
     const priceNow = data.price ? data.price.toLocaleString("vi-VN") + "₫" : "Giá cập nhật trên sàn";
@@ -749,7 +764,6 @@
       ctx.stroke();
     }
 
-    // Badge góc phải
     const badgeText = shareBadge || "Sản phẩm chọn lọc";
     ctx.font = "600 " + Math.round(w*0.026) + "px system-ui";
     const badgeWidth = ctx.measureText(badgeText).width + w*0.06;
@@ -766,7 +780,6 @@
     ctx.textBaseline = "middle";
     ctx.fillText(badgeText, badgeX + w*0.03, badgeY + badgeHeight/2);
 
-    // Dải brand phía dưới
     const stripH = h*0.09;
     const stripY = h - stripH;
     ctx.fillStyle = "rgba(15,23,42,0.92)";
@@ -783,7 +796,6 @@
     const tagline = shareTagline || ("Check giá & ưu đãi mới nhất trực tiếp trên " + merchantLabel(data.merchant));
     wrapText(ctx, tagline, margin, stripY + stripH*0.8, w - margin*2, w*0.03, 2);
 
-    // SKU nhỏ góc phải
     ctx.font = "500 " + Math.round(w*0.02) + "px ui-monospace,monospace";
     ctx.textAlign = "right";
     ctx.fillStyle = "#6b7280";
@@ -805,7 +817,7 @@
     try{
       const dataUrl = canvas.toDataURL("image/png");
       const data = lastData || buildJson() || {};
-      const namePart = data.sku || "bongstudio";
+      const namePart = getDownloadBaseName(data);
       const a = document.createElement("a");
       a.href = dataUrl;
       a.download = namePart + "-poster.png";
@@ -836,7 +848,7 @@
         return;
       }
       const data = lastData || buildJson() || {};
-      const namePart = data.sku || "bongstudio";
+      const namePart = getDownloadBaseName(data);
       const a = document.createElement("a");
       a.href = dataUrl;
       a.download = namePart + "-poster.webp";
@@ -883,7 +895,7 @@
         return;
       }
       const data = lastData || buildJson() || {};
-      const namePart = data.sku || "bongstudio-thumb";
+      const namePart = getDownloadBaseName(data);
       const a = document.createElement("a");
       a.href = dataUrl;
       a.download = namePart + "-thumb.webp";
@@ -897,8 +909,6 @@
       statusEl.className = "badge-err";
     }
   }
-
-  // --- Event handlers ---
 
   $("btnSlug").addEventListener("click", function(){
     const title = $("title").value;
@@ -928,7 +938,7 @@
   $("btnClear").addEventListener("click", function(){
     [
       "originUrl","title","priceNow","priceOld","sku",
-      "thumbUrl","shortDesc","shareTitle","shareTagline","shareBadge"
+      "thumbUrl","shortDesc","shareTitle","shareTagline","shareBadge","downloadName"
     ].forEach(id => {
       if($(id)) $(id).value = "";
     });
@@ -993,7 +1003,6 @@
     downloadThumbWebp();
   });
 
-  // File ảnh local
   const uploadInput = $("uploadFile");
   if(uploadInput){
     uploadInput.addEventListener("change", function(e){
@@ -1021,7 +1030,6 @@
     });
   }
 
-  // Khởi tạo preview rỗng
   $("previewImg").src = "";
 })();
 </script>
