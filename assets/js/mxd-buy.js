@@ -1,5 +1,5 @@
 ;(() => {
-  // Base AccessTrade mới cho Bongstudio
+  // Base AccessTrade cho Bongstudio
   const AFF_BASE = {
     shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237",
     lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578",
@@ -14,7 +14,7 @@
   function makeIsclixUrl(originUrl, merchant, sku) {
     if (!originUrl) return "";
     const base = AFF_BASE[merchant] || "";
-    if (!base) return originUrl; // không có base thì bắn thẳng về link gốc
+    if (!base) return originUrl; // không có base thì bắn thẳng link gốc
 
     const sep = base.includes("?") ? "&" : "?";
     const head = base + sep + "url=" + encodeURIComponent(originUrl);
@@ -27,7 +27,7 @@
     return head + "&" + params.join("&");
   }
 
-  // Lấy data-* từ nút hoặc thẻ cha gần nhất
+  // Tìm data-* trên nút hoặc thẻ cha
   function findData(el, key) {
     if (!el) return "";
     if (el.dataset && el.dataset[key]) return el.dataset[key];
@@ -36,8 +36,9 @@
   }
 
   function handleClick(e) {
+    // Bắt các loại nút mua có thể có
     const btn = e.target.closest(
-      ".js-mxd-buy, .js-buy-btn, [data-role='buy-button']"
+      ".js-mxd-buy, .js-buy-btn, .btn-buy, [data-role='buy-button']"
     );
     if (!btn) return;
 
