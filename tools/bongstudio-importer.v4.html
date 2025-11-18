@@ -1,4 +1,3 @@
-<!-- REPLACE WHOLE FILE: /tools/bongstudio-importer.v4.html -->
 <!doctype html>
 <html lang="vi">
 <head>
@@ -352,7 +351,7 @@
             <input type="checkbox" id="featured" style="width:auto"/> Nổi bật (featured)
           </label>
           <label style="display:flex;align-items:center;gap:8px;flex:unset">
-            <input type="checkbox" id="status" checked style="width:auto"/> Hiển thị (status)
+            <input type="checkbox" id="status" checked style="width-auto"/> Hiển thị (status)
           </label>
           <button class="btn" id="btnAuto">Điền auto từ tên</button>
         </div>
@@ -706,7 +705,7 @@ function initImporter() {
       if(!has(k)) qs.push(`${k}=${encodeURIComponent(subs[k])}`);
     return qs.length?(u+(u.includes('?')?'&':'?')+qs.join('&')):u;
   }
-  function cleanUrl(u){ return (u||'').trim().replace(/^["']+|["',]+$/g,''); }
+  function cleanUrl(u){ return (u||'').trim().replace(/^['"]+|['",]+$/g,''); }
 
   function activeTplFor(merchant){
     const s=readSettings();
@@ -939,7 +938,7 @@ function initImporter() {
       handleSingleFile(files[0]);
     } else {
       for(const f of files){ queueAddRawFile(f); }
-      toast(`Đã thêm ${files.length} ảnh vào hàng đợi.`,'ok');
+      toast(`Đã thêm ${files.length} ảnh vào hàng đợi.`,"ok");
     }
   }
 
@@ -1516,11 +1515,11 @@ function initImporter() {
 
   /* Commit message generator */
   $("#btnGenCommit").onclick=()=>{
-    const sku = ($("#sku").value||'').trim();
-    const name = ($("#name").value||'').trim();
-    const cat = ($("#category").value||'').trim() || 'khac';
+    const sku = (($("#sku").value)||'').trim();
+    const name = (($("#name").value)||'').trim();
+    const cat = (($("#category").value)||'').trim() || 'khac';
     const feat = $("#featured").checked;
-    const hasImg = ($("#image").value||'').trim();
+    const hasImg = (($("#image").value)||'').trim();
     const msg = `feat(product): add ${slugify(sku||'sku')} "${name||'Product'}" (cat=${cat})${feat?' [featured]':''}${hasImg?' + image':''}`;
     $("#commitMsg").value = msg;
     $("#commitMsg").select();
