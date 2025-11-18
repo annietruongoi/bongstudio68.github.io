@@ -1,4 +1,3 @@
-<!-- NEW FILE: /category-quan-ao-em-be.html -->
 <!doctype html>
 <html lang="vi">
 <head>
@@ -32,7 +31,7 @@
   <!-- CSS chung -->
   <link rel="stylesheet" href="/assets/css/styles.css"/>
 
-  <!-- STYLE nhẹ, đồng bộ với các trang khác -->
+  <!-- STYLE -->
   <style>
     .container {
       max-width: 1120px;
@@ -117,6 +116,7 @@
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: .9rem;
       padding-bottom: 2.5rem;
+      min-height: 3rem;
     }
     .product-card {
       border-radius: 1rem;
@@ -150,7 +150,7 @@
     .product-name {
       font-size: .95rem;
       line-height: 1.4;
-      max-height: 2.8em; /* ~2 dòng */
+      max-height: 2.8em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -259,76 +259,22 @@
           bé mặc lâu cũng đỡ khó chịu. Chọn kiểu basic, dễ thay, đỡ “đánh vật” với bé khi thay đồ.
         </p>
         <div class="cat-meta">
-          Gợi ý: nếu muốn xem thêm đồ cho bố mẹ (thời trang nam/nữ, gia dụng…), bạn có thể mở thêm
-          <a href="/store.html">Cửa hàng tổng</a>.
+          Gợi ý: nếu muốn xem thêm đồ cho bố mẹ (thời trang nam/nữ, gia dụng…),
+          bạn có thể mở thêm <a href="/store.html">Cửa hàng tổng</a>.
         </div>
       </div>
     </section>
 
-    <!-- LƯỚI SẢN PHẨM: MẪU QUẦN ÁO EM BÉ -->
+    <!-- LƯỚI SẢN PHẨM: RENDER TỪ JSON -->
     <section>
       <div class="container">
         <div class="home-section-head">
-          <h2>Sản phẩm quần áo em bé (bản test)</h2>
-          <p>Sau này kho sản phẩm & tool sẽ thay toàn bộ khối này bằng dữ liệu thật.</p>
+          <h2>Sản phẩm quần áo em bé</h2>
+          <p>Dữ liệu đang lấy từ kho JSON /assets/data/bongstudio-products.json (category: quan-ao-em-be).</p>
         </div>
 
-        <div class="product-grid">
-          <!-- CARD 1: Bộ bodysuit (Shopee placeholder) -->
-          <article class="product-card"
-                   data-sku="BS-BE-BODY-001"
-                   data-merchant="shopee"
-                   data-origin-url="https://shopee.vn/">
-            <a class="product-thumb" href="#bodysuit" aria-label="Bộ bodysuit cho bé sơ sinh">
-              <img src="/assets/img/products/bo-bodysuit-em-be.webp"
-                   loading="lazy"
-                   alt="Bộ bodysuit cho bé sơ sinh, chất cotton (minh họa)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Bộ bodysuit cho bé – Chất cotton mềm, dễ thay tã, hợp mùa nóng
-              </h3>
-              <div class="product-merchant">Nguồn: Shopee (placeholder, sau thay link thật)</div>
-              <div class="product-price">
-                <span class="product-price-current">99.000₫</span>
-                <span class="product-price-old">139.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary js-mxd-buy" type="button">
-                  Mua bodysuit trên Shopee
-                </button>
-                <a class="btn-secondary" href="#bodysuit">Chi tiết</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 2: Bộ pijama em bé (Lazada placeholder) -->
-          <article class="product-card"
-                   data-sku="BS-BE-PJ-001"
-                   data-merchant="lazada"
-                   data-origin-url="https://www.lazada.vn/">
-            <a class="product-thumb" href="#pj-be" aria-label="Bộ pijama em bé tay dài quần dài">
-              <img src="/assets/img/products/bo-pijama-em-be.webp"
-                   loading="lazy"
-                   alt="Bộ pijama em bé tay dài quần dài, chất mềm (minh họa)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Bộ pijama em bé – Tay dài quần dài, hợp mặc điều hoà, tối ngủ
-              </h3>
-              <div class="product-merchant">Nguồn: Lazada (placeholder, sau thay link thật)</div>
-              <div class="product-price">
-                <span class="product-price-current">129.000₫</span>
-                <span class="product-price-old">179.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary js-mxd-buy" type="button">
-                  Mua pijama trên Lazada
-                </button>
-                <a class="btn-secondary" href="#pj-be">Chi tiết</a>
-              </div>
-            </div>
-          </article>
+        <div class="product-grid" data-category="quan-ao-em-be">
+          Đang tải sản phẩm...
         </div>
       </div>
     </section>
@@ -352,58 +298,7 @@
     </div>
   </footer>
 
-  <!-- SCRIPT ISCLIX: CHUẨN CHUNG TOÀN SITE -->
-  <script>
-    ;(function(){
-      const AFF_BASE = {
-        shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237",
-        lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578",
-        tiktok: "https://go.isclix.com/deep_link/6837508078414670452/6648523843406889655"
-      };
-
-      const UTM_BASE = "utm_source=" + encodeURIComponent(location.hostname) + "&utm_medium=affiliate";
-
-      function makeIsclixUrl(base, originUrl, sku, merchant){
-        if(!base || !originUrl) return originUrl;
-        const head = base + (base.includes("?") ? "&" : "?") + "url=" + encodeURIComponent(originUrl);
-        const params = [
-          UTM_BASE,
-          "utm_campaign=" + encodeURIComponent(merchant || ""),
-          "sub1=" + encodeURIComponent(sku || ""),
-          "sub2=" + encodeURIComponent(merchant || "")
-        ];
-        return head + "&" + params.join("&");
-      }
-
-      function wireCatCards(){
-        const cards = document.querySelectorAll(".product-card[data-origin-url][data-merchant]");
-        if(!cards.length) return;
-
-        cards.forEach(card => {
-          const sku = card.getAttribute("data-sku") || "";
-          const merchant = (card.getAttribute("data-merchant") || "").toLowerCase();
-          const origin = card.getAttribute("data-origin-url");
-          const base = AFF_BASE[merchant];
-          const btn = card.querySelector(".js-mxd-buy");
-          if(!btn) return;
-
-          const finalUrl = makeIsclixUrl(base, origin, sku, merchant);
-
-          btn.addEventListener("click", function(ev){
-            ev.preventDefault();
-            const urlToOpen = finalUrl || origin;
-            if(!urlToOpen) return;
-            window.open(urlToOpen, "_blank");
-          });
-        });
-      }
-
-      if(document.readyState === "loading"){
-        document.addEventListener("DOMContentLoaded", wireCatCards);
-      } else {
-        wireCatCards();
-      }
-    })();
-  </script>
+  <!-- TOOL RENDER + ISCLIX CHUNG -->
+  <script defer src="/assets/js/bongstudio-products.js"></script>
 </body>
 </html>
