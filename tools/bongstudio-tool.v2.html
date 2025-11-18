@@ -651,7 +651,7 @@ function initImporter() {
 
     if(/\b(sach|sach giao khoa|truyen|tieu thuyet|book)\b/.test(t)) return 'sach';
     if(/\b(banh|keo|snack|mi|mì|gao|gạo|do an|thuc an|an vat)\b/.test(t)) return 'do-an';
-    if(/\b(gia dung|noi|chao|noi com|noi cơm|noi chien|noi-chien|noi-chien|noi-chien-khong-dau|bep|sofa|ke|kệ|den|đèn|decor|trang tri|nha cua)\b/.test(t)) return 'gia-dung-decor';
+    if(/\b(gia dung|noi|chao|noi com|noi cơm|noi chien|noi-chien|noi-chien-khong-dau|bep|sofa|ke|kệ|den|đèn|decor|trang tri|nha cua)\b/.test(t)) return 'gia-dung-decor';
     if(/\b(em be|tre em|tre-so-sinh|so sinh|sosinh|baby|kids|nhi dong)\b/.test(t)) return 'quan-ao-em-be';
     if(/\b(vitamin|collagen|omega|tp chuc nang|thuc pham chuc nang|tpcn|suc khoe)\b/.test(t)) return 'suc-khoe-tpcn';
 
@@ -839,6 +839,36 @@ function initImporter() {
   }
 
   const queue=[]; let seq=0;
+
+  /* Thêm ảnh đang preview vào hàng đợi (nút ➕) */
+  const btnQueueCurrent = $("#btnQueueCurrent");
+  if (btnQueueCurrent) {
+    btnQueueCurrent.onclick = () => {
+      if (!state.imgBlob) {
+        toast("Chưa có ảnh đang xem để thêm vào hàng đợi.","warn");
+        return;
+      }
+      const rawSku = $("#sku").value.trim();
+      const name = rawSku ? slugify(rawSku) : (state.imgName ? slugify(state.imgName) : 'tt');
+      const fmt = getSelectedFmt();
+      const folder = getSelectedFolder();
+      const item = {
+        id: (++seq),
+        srcFile: null,
+        name,
+        fmt,
+        folder,
+        customPath: $("#defaultFolder").value === 'custom',
+        outBlob: state.imgBlob,
+        w: state.imgW,
+        h: state.imgH,
+        status: 'ready'
+      };
+      queue.push(item);
+      renderQueue();
+      toast("Đã thêm ảnh hiện tại vào hàng đợi.","ok");
+    };
+  }
 
   async function queueAddRawFile(file){
     const name=decideNameFor(file);
