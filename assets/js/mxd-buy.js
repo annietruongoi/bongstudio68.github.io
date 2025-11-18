@@ -12,13 +12,22 @@
     encodeURIComponent(location.hostname) +
     "&utm_medium=affiliate";
 
-  function makeIsclixUrl(originUrl, merchant, sku) {
-    if (!originUrl) return "";
-    merchant = (merchant || "shopee").toLowerCase();
+  function fixOrigin(url){
+    if(!url) return "";
+    url = String(url).trim();
+    if(!url) return "";
+    if(/^https?:\/\//i.test(url)) return url;
+    if(url.startsWith("//")) return "https:" + url;
+    return "https://" + url.replace(/^\/+/, "");
+  }
 
+  function makeIsclixUrl(originUrl, merchant, sku) {
+    originUrl = fixOrigin(originUrl);
+    if (!originUrl) return "";
+
+    merchant = (merchant || "shopee").toLowerCase();
     const base = AFF_BASE[merchant] || "";
-    // Nếu chưa cấu hình base cho merchant thì cho đi thẳng link gốc
-    if (!base) return originUrl;
+    if (!base) return originUrl; // chưa khai base thì bắn thẳng link gốc
 
     const sep = base.includes("?") ? "&" : "?";
     const head = base + sep + "url=" + encodeURIComponent(originUrl);
@@ -43,23 +52,23 @@
     const fromData =
       getDataset(btn, "origin") ||
       getDataset(btn, "originUrl");
-    if (fromData) return fromData;
+    if (fromData) return fixOrigin(fromData);
 
     const href = btn.getAttribute("href") || "";
-    if (/^https?:\/\//i.test(href)) return href;
+    if (href) return fixOrigin(href);
 
     return "";
   }
 
   function clickHandler(e) {
     const btn = e.target.closest(
-      ".btn-buy, .js-mxd-buy, .js-buy-btn, [data-role='buy-button']"
+      ".btn-buy, .js-mxd-buy, .js-buy-btn, .product-card a.thumb, [data-role='buy-button']"
     );
     if (!btn) return;
 
     const origin = getOrigin(btn);
     if (!origin) {
-      // Không biết link gốc → cho đi theo href mặc định
+      // Không biết link gốc thì để mặc định (tránh chặn nhầm)
       return;
     }
 
