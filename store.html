@@ -405,14 +405,13 @@
     </div>
   </footer>
 
-  <!-- SCRIPT: load affiliates.json + isclix aff_base riêng Bongstudio -->
+  <!-- SCRIPT: load affiliates.json + build card + gắn nút mua -->
   <script>
     ;(function(){
       const GRID = document.querySelector(".product-grid");
       const selCategory = document.getElementById("filter-category");
       const selMerchant = document.getElementById("filter-merchant");
 
-      // aff_base riêng của Bongstudio (PUB_ID 6837)
       const AFF_BASE = {
         shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237",
         lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578",
@@ -459,8 +458,19 @@
         const card = document.createElement("article");
         card.className = "product-card";
 
-        const imgSrc = p.image || "/assets/og/default-og.webp";
-        const merchantLabel = MERCHANT_LABEL[(p.merchant || "").toLowerCase()] || "Khác";
+        const imgSrc = p.image || p.image_url || "/assets/og/default-og.webp";
+        const merchantKey = (p.merchant || p.san || p.platform || "").toLowerCase();
+        const merchantLabel = MERCHANT_LABEL[merchantKey] || "Khác";
+
+        // LẤY LINK GỐC ĐÚNG FIELD
+        const originUrl =
+          p.origin_url ||
+          p.origin ||
+          p.url ||
+          p.product_url ||
+          "";
+
+        const sku = p.sku || p.id || p.code || "";
 
         card.innerHTML = `
           <a class="product-thumb" href="javascript:void(0)" aria-label="Xem chi tiết sản phẩm">
@@ -485,7 +495,7 @@
         `;
 
         const btn = card.querySelector(".js-mxd-buy");
-        const finalUrl = makeIsclixUrl((p.merchant || "").toLowerCase(), p.origin, p.sku);
+        const finalUrl = makeIsclixUrl(merchantKey, originUrl, sku);
 
         if (btn && finalUrl) {
           btn.addEventListener("click", function(ev){
@@ -578,13 +588,10 @@
       }
     })();
   </script>
+
+  <!-- Các script dùng chung hệ MXD (nếu cần ở trang khác) -->
   <script defer src="/assets/mxd-affiliates.js?v=1"></script>
-<script defer src="/assets/mxd-store.js?v=1"></script>
-
-<!-- DÒNG QUAN TRỌNG -->
-<script defer src="/assets/mxd-buy.js?v=20251119"></script>
-</body>
-</html>
-
+  <script defer src="/assets/mxd-store.js?v=1"></script>
+  <script defer src="/assets/mxd-buy.js?v=20251119"></script>
 </body>
 </html>
