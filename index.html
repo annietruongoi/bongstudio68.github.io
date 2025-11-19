@@ -43,6 +43,9 @@
       --text-muted: #9ca3af;
       --accent: #ec4899;
       --accent-soft: #f472b6;
+      --error: #f97373;
+      --warn: #facc15;
+      --ok: #4ade80;
     }
 
     body {
@@ -150,7 +153,7 @@
     }
     .home-section-head {
       display: flex;
-      align-items: baseline;
+      align-items: flex-start;
       justify-content: space-between;
       gap: .75rem;
       margin-bottom: .75rem;
@@ -158,10 +161,28 @@
     .home-section-head h2 {
       font-size: 1.2rem;
       color: #f9fafb;
+      margin: 0 0 .15rem;
     }
     .home-section-head p {
       font-size: .85rem;
       color: var(--text-muted);
+      margin: 0;
+    }
+
+    .home-status {
+      font-size: .8rem;
+      color: var(--text-muted);
+      text-align: right;
+      min-height: 1.2em;
+    }
+    .home-status[data-tone="error"] {
+      color: var(--error);
+    }
+    .home-status[data-tone="warn"] {
+      color: var(--warn);
+    }
+    .home-status[data-tone="ok"] {
+      color: var(--ok);
     }
 
     .product-grid {
@@ -375,8 +396,10 @@
     <section class="home-categories">
       <div class="container">
         <div class="home-section-head">
-          <h2>Danh mục đang có</h2>
-          <p>Nhấp vào để xem đầy đủ trong cửa hàng.</p>
+          <div>
+            <h2>Danh mục đang có</h2>
+            <p>Nhấp vào để xem đầy đủ trong cửa hàng.</p>
+          </div>
         </div>
         <div class="home-categories-grid">
           <a class="category-card" href="/store.html">
@@ -396,7 +419,7 @@
             <span>Đồ cho bé thoáng, dễ giặt, ưu tiên chất liệu ổn.</span>
           </a>
           <a class="category-card" href="/store.html">
-            <strong>Sức khỏe & TPCN</strong>
+            <strong>Sức khỏe &amp; TPCN</strong>
             <span>Một số sản phẩm chăm sóc sức khỏe được chọn lọc.</span>
           </a>
           <a class="category-card" href="/store.html">
@@ -404,104 +427,26 @@
             <span>Sách hay, dễ đọc, có thể ứng dụng được.</span>
           </a>
           <a class="category-card" href="/store.html">
-            <strong>Đồ ăn & đồ uống</strong>
+            <strong>Đồ ăn &amp; đồ uống</strong>
             <span>Một vài món tiện lợi, dễ mua online.</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- SẢN PHẨM GỢI Ý (TEST ISCLIX) -->
+    <!-- SẢN PHẨM NỔI BẬT: ĐỌC TỪ affiliates.json, TỐI ĐA 100 SP -->
     <section class="home-products">
       <div class="container">
         <div class="home-section-head">
-          <h2>Sản phẩm gợi ý hôm nay</h2>
-          <p>Các mẫu để kiểm tra isclix trên trang chủ Bongstudio.</p>
+          <div>
+            <h2>Sản phẩm nổi bật</h2>
+            <p>Các sản phẩm được đánh dấu <code>featured: true</code> trong Bongstudio.</p>
+          </div>
+          <div id="homeFeaturedStatus" class="home-status"></div>
         </div>
 
-        <div class="product-grid">
-          <!-- CARD 1: Pijama -->
-          <article class="product-card"
-                   data-sku="BS-PJ-001"
-                   data-merchant="shopee"
-                   data-origin-url="https://shopee.vn/Pijama-Xinh-Tay-D%C3%A0i-Qu%E1%BA%A7n-D%C3%A0i-%C4%90%E1%BB%93-Ng%E1%BB%A7-Gi%C3%A1-R%E1%BA%BB-%C4%90%E1%BB%93-B%E1%BB%99-Ng%E1%BB%A7-N%E1%BB%AF-Pyjama-%C4%90%E1%BB%93-B%E1%BB%99-M%E1%BA%B7c-Nh%C3%A0-Ch%C3%A2%CC%81t-Ma%CC%81t-Kh%C3%B4ng-Nh%C4%83n-Ha%CC%80ng-Si%C3%AAu-%C4%90e%CC%A3p-i.1121158422.20386415824">
-            <a class="product-thumb" href="/store.html" aria-label="Xem thêm sản phẩm Pijama trong cửa hàng Bongstudio">
-              <img src="/assets/img/products/pijama-xinh-tay-dai-quan-dai.webp"
-                   loading="lazy"
-                   alt="Pijama xinh tay dài quần dài, chất mát, không nhăn (minh họa)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Pijama Xinh Tay Dài Quần Dài – Chất mát, không nhăn, dễ mặc ở nhà
-              </h3>
-              <div class="product-merchant">Nguồn: Shopee</div>
-              <div class="product-price">
-                <span class="product-price-current">57.000₫</span>
-                <span class="product-price-old">89.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary btn-buy js-mxd-buy" type="button">
-                  Mua ngay trên Shopee
-                </button>
-                <a class="btn-secondary" href="/store.html">Xem thêm</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 2: Sơ mi trắng Rymola -->
-          <article class="product-card"
-                   data-sku="BS-SM-001"
-                   data-merchant="shopee"
-                   data-origin-url="https://shopee.vn/%C3%81o-S%C6%A1-Mi-Tr%E1%BA%AFng-N%E1%BB%AF-Rymola-Kh%C3%B4ng-Nh%C4%83n-Gi%E1%BA%A5u-N%C3%BAt-Tay-D%C3%A0i-C%C3%B3-Bigsize-S%C6%A1-Mi-Tr%E1%BA%AFng-C%C3%B4ng-S%E1%BB%9F-Ch%E1%BA%A5t-V%E1%BA%A3i-Cotton-Form-Su%C3%B4ng-i.8496476.6342798120">
-            <a class="product-thumb" href="/store.html" aria-label="Xem thêm áo sơ mi trắng Rymola trong cửa hàng">
-              <img src="/assets/img/products/ao-so-mi-trang-nu-rymola.webp"
-                   loading="lazy"
-                   alt="Áo sơ mi trắng nữ Rymola, không nhăn, giấu nút (minh họa)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Áo Sơ Mi Trắng Nữ Rymola – Không nhăn, giấu nút, dễ phối đồ
-              </h3>
-              <div class="product-merchant">Nguồn: Shopee</div>
-              <div class="product-price">
-                <span class="product-price-current">199.000₫</span>
-                <span class="product-price-old">250.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary btn-buy js-mxd-buy" type="button">
-                  Mua áo trên Shopee
-                </button>
-                <a class="btn-secondary" href="/store.html">Xem thêm</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 3: chỗ trống, sau có thể thay bằng sản phẩm khác -->
-          <article class="product-card"
-                   data-sku="BS-GD-001"
-                   data-merchant="lazada"
-                   data-origin-url="https://www.lazada.vn/">
-            <a class="product-thumb" href="/store.html" aria-label="Xem thêm sản phẩm gia dụng trong cửa hàng">
-              <img src="/assets/img/products/gia-dung-minh-hoa.webp"
-                   loading="lazy"
-                   alt="Sản phẩm gia dụng minh họa (placeholder)"/>
-            </a>
-            <div class="product-card-body">
-              <h3 class="product-name">
-                Sản phẩm gia dụng minh họa – chỗ này để test link Lazada
-              </h3>
-              <div class="product-merchant">Nguồn: Lazada (test)</div>
-              <div class="product-price">
-                <span class="product-price-current">123.000₫</span>
-              </div>
-              <div class="product-actions">
-                <button class="btn-primary btn-buy js-mxd-buy" type="button">
-                  Mua trên Lazada
-                </button>
-                <a class="btn-secondary" href="/store.html">Xem thêm</a>
-              </div>
-            </div>
-          </article>
+        <div id="homeFeaturedGrid" class="product-grid">
+          <!-- JS sẽ render tối đa 100 product-card vào đây -->
         </div>
       </div>
     </section>
@@ -525,21 +470,121 @@
     </div>
   </footer>
 
-  <!-- SCRIPT ISCLIX: CHUẨN HOÁ CHO TRANG CHỦ -->
+  <!-- SCRIPT: ĐỌC affiliates.json, LỌC featured, TỐI ĐA 100 SP, SINH ISCLIX + GA4 -->
   <script>
-    ;(function(){
-      // aff_base riêng của Bongstudio: dùng đúng bộ 6837 mà cậu đã đưa
+    ;(function () {
+      const GRID   = document.getElementById("homeFeaturedGrid");
+      const STATUS = document.getElementById("homeFeaturedStatus");
+      const AFF_PATH = "/assets/data/affiliates.json";
+      const FALLBACK_IMG = "/assets/img/products/placeholder.webp";
+
+      if (!GRID) return;
+
+      function setStatus(msg, tone) {
+        if (!STATUS) return;
+        STATUS.textContent = msg || "";
+        if (tone) STATUS.dataset.tone = tone; else STATUS.removeAttribute("data-tone");
+      }
+
+      function escapeHtml(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function formatPrice(v) {
+        const n = Number(v || 0);
+        if (!n) return "";
+        try {
+          return n.toLocaleString("vi-VN") + "₫";
+        } catch (_) {
+          return n + "₫";
+        }
+      }
+
+      function normalizeMerchant(raw) {
+        const v = String(raw || "").toLowerCase();
+        if (!v) return "";
+        if (v.includes("shopee")) return "shopee";
+        if (v.includes("lazada")) return "lazada";
+        if (v.includes("tiki"))   return "tiki";
+        if (v.includes("tik"))    return "tiktok"; // tik tok, tiktokshop, v.v.
+        return v;
+      }
+
+      function merchantLabel(m) {
+        switch (m) {
+          case "shopee": return "Shopee";
+          case "lazada": return "Lazada";
+          case "tiktok": return "TikTok Shop";
+          case "tiki":   return "Tiki";
+          default:       return "sàn";
+        }
+      }
+
+      function buildCard(product) {
+        const sku   = product.sku || "";
+        const name  = product.name || product.title || "";
+        const img   = product.image || product.image_url || FALLBACK_IMG;
+        const merchantRaw = product.merchant || product.platform || "";
+        const merchant    = normalizeMerchant(merchantRaw);
+        const origin      = product.origin_url || product.origin || "";
+        const priceNow    = product.price_vnd || product.price || product.final_price_vnd || 0;
+        const priceOld    = product.price_old_vnd || product.list_price_vnd || 0;
+
+        const priceNowText = formatPrice(priceNow);
+        const priceOldText = formatPrice(priceOld);
+
+        return '' +
+          '<article class="product-card"' +
+            ' data-sku="' + escapeHtml(sku) + '"' +
+            ' data-merchant="' + escapeHtml(merchant) + '"' +
+            ' data-origin-url="' + escapeHtml(origin) + '"' +
+          '>' +
+            '<a class="product-thumb" href="/store.html" aria-label="Xem thêm trong cửa hàng">' +
+              '<img src="' + escapeHtml(img) + '" loading="lazy" alt="' + escapeHtml(name) + '"/>' +
+            '</a>' +
+            '<div class="product-card-body">' +
+              '<h3 class="product-name">' + escapeHtml(name) + '</h3>' +
+              '<div class="product-merchant">Nguồn: ' + escapeHtml(merchantLabel(merchant)) + '</div>' +
+              '<div class="product-price">' +
+                (priceNowText
+                  ? '<span class="product-price-current">' + escapeHtml(priceNowText) + '</span>'
+                  : ''
+                ) +
+                (priceOldText && priceOld > priceNow
+                  ? '<span class="product-price-old">' + escapeHtml(priceOldText) + '</span>'
+                  : ''
+                ) +
+              '</div>' +
+              '<div class="product-actions">' +
+                '<button class="btn-primary btn-buy js-mxd-buy" type="button">' +
+                  'Mua trên ' + escapeHtml(merchantLabel(merchant)) +
+                '</button>' +
+                '<a class="btn-secondary" href="/store.html">Xem thêm</a>' +
+              '</div>' +
+            '</div>' +
+          '</article>';
+      }
+
+      // Gốc deeplink của AccessTrade cho Bongstudio
       const AFF_BASE = {
         shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237",
         lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578",
         tiktok: "https://go.isclix.com/deep_link/6837508078414670452/6648523843406889655"
       };
 
-      const UTM_BASE = "utm_source=" + encodeURIComponent(location.hostname) + "&utm_medium=affiliate";
+      const UTM_BASE =
+        "utm_source=" + encodeURIComponent(location.hostname) +
+        "&utm_medium=affiliate";
 
-      function makeIsclixUrl(base, originUrl, sku, merchant){
-        if(!base || !originUrl) return originUrl;
-        const head = base + (base.includes("?") ? "&" : "?") + "url=" + encodeURIComponent(originUrl);
+      function makeIsclixUrl(base, originUrl, sku, merchant) {
+        if (!base || !originUrl) return originUrl;
+        const head = base + (base.includes("?") ? "&" : "?") +
+          "url=" + encodeURIComponent(originUrl);
         const params = [
           UTM_BASE,
           "utm_campaign=" + encodeURIComponent(merchant || ""),
@@ -549,36 +594,86 @@
         return head + "&" + params.join("&");
       }
 
-      function wireHomeCards(){
-        const cards = document.querySelectorAll(".product-card[data-origin-url][data-merchant]");
-        if(!cards.length) return;
+      function wireBuyButtons() {
+        const cards = GRID.querySelectorAll(".product-card[data-origin-url][data-merchant]");
+        if (!cards.length) return;
 
-        cards.forEach(card => {
-          const sku = card.getAttribute("data-sku") || "";
-          const merchant = (card.getAttribute("data-merchant") || "").toLowerCase();
-          const origin = card.getAttribute("data-origin-url");
-          const base = AFF_BASE[merchant];
+        cards.forEach(function (card) {
+          const sku       = card.getAttribute("data-sku") || "";
+          const merchant0 = card.getAttribute("data-merchant") || "";
+          const merchant  = normalizeMerchant(merchant0);
+          const origin    = card.getAttribute("data-origin-url") || "";
+          const base      = AFF_BASE[merchant];
+          const btn       = card.querySelector(".js-mxd-buy");
+          if (!btn || !origin) return;
 
-          const btn = card.querySelector(".js-mxd-buy");
-          if(!btn) return;
+          const productNameEl = card.querySelector(".product-name");
+          const productName   = productNameEl ? productNameEl.textContent.trim() : "";
 
           const finalUrl = makeIsclixUrl(base, origin, sku, merchant);
 
-          btn.addEventListener("click", function(ev){
+          btn.addEventListener("click", function (ev) {
             ev.preventDefault();
             const urlToOpen = finalUrl || origin;
-            if(!urlToOpen) return;
-            window.open(urlToOpen, "_blank");
+            if (!urlToOpen) return;
+
+            // GA4 event (nếu gtag có sẵn)
+            try {
+              if (typeof window.gtag === "function") {
+                window.gtag("event", "click_buy", {
+                  event_category: "affiliate",
+                  event_label: merchant || "",
+                  value: 1,
+                  items: sku ? [{
+                    item_id: sku,
+                    item_name: productName
+                  }] : undefined
+                });
+              }
+            } catch (e) {
+              console.warn("[Bongstudio][GA4] Lỗi gửi event click_buy:", e);
+            }
+
+            window.open(urlToOpen, "_blank", "noopener");
           });
         });
       }
 
-      if(document.readyState === "loading"){
-        document.addEventListener("DOMContentLoaded", wireHomeCards);
-      } else {
-        wireHomeCards();
+      async function loadFeatured() {
+        try {
+          setStatus("Đang tải sản phẩm nổi bật…", ""); // neutral
+          const res = await fetch(AFF_PATH + "?v=" + Date.now(), { cache: "no-store" });
+          if (!res.ok) {
+            throw new Error("Không đọc được affiliates.json: HTTP " + res.status);
+          }
+          const all = await res.json();
+
+          let featured = (all || []).filter(function (p) {
+            if (!p) return false;
+            // chấp nhận true hoặc "true"
+            return p.featured === true || p.featured === "true" || p.featured === 1;
+          });
+
+          // Giới hạn 100 sản phẩm
+          featured = featured.slice(0, 100);
+
+          if (!featured.length) {
+            GRID.innerHTML = "";
+            setStatus("Chưa có sản phẩm nào được đánh dấu nổi bật (featured: true).", "warn");
+            return;
+          }
+
+          GRID.innerHTML = featured.map(buildCard).join("");
+          wireBuyButtons();
+
+          setStatus("Đang hiển thị " + featured.length + " sản phẩm nổi bật.", "ok");
+        } catch (err) {
+          console.error("[Bongstudio][home-featured] Lỗi:", err);
+          GRID.innerHTML = "";
+          setStatus("Lỗi khi tải danh sách sản phẩm. Vui lòng thử lại sau.", "error");
+        }
       }
-    })();
-  </script>
-</body>
-</html>
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadFeatured);
+      } else {
