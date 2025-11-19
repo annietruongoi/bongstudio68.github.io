@@ -1,18 +1,5 @@
 [
   {
-    "sku": "BS-PJ-001",
-    "name": "Pijama Xinh Tay Dài Quần Dài – Chất mát, không nhăn, dễ mặc ở nhà",
-    "merchant": "shopee",
-    "origin": "https://shopee.vn/Pijama-Xinh-Tay-D%C3%A0i-Qu%E1%BA%A7n-D%C3%A0i-%C4%90%E1%BB%93-Ng%E1%BB%A7-Gi%C3%A1-R%E1%BA%BB-%C4%90%E1%BB%93-B%E1%BB%99-Ng%E1%BB%A7-N%E1%BB%AF-Pyjama-%C4%90%E1%BB%93-B%E1%BB%99-M%E1%BA%B7c-Nh%C3%A0-Ch%C3%A2%CC%81t-Ma%CC%81t-Kh%C3%B4ng-Nh%C4%83n-Ha%CC%80ng-Si%C3%AAu-%C4%90e%CC%A3p-i.1121158422.20386415824",
-    "image": "/assets/img/products/pijama-xinh-tay-dai-quan-dai.webp",
-    "price_vnd": 57000,
-    "category": "thoi-trang-nu",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-11-19T07:00:00Z"
-  },
-  {
     "sku": "ao-croptop-ba-lo-nu-toptify",
     "name": "Áo croptop ba lỗ nữ TOPTIFY",
     "merchant": "shopee",
@@ -104,19 +91,6 @@
     "updated_at": "2025-10-21T15:19:36.186Z"
   },
   {
-    "sku": "ao-the-thao-body-dai-tay-w-co-khoa-phoi-chan-vay-xep-ly",
-    "name": "Áo Thể Thao Body Dài Tay W Cổ Khóa Phối Chân Váy Xếp Ly",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/Set-%C4%90%E1%BB%93-N%E1%BB%AF-%C4%90%E1%BB%93-Th%E1%BB%83-Thao-N%E1%BB%AF-%C3%81o-Th%E1%BB%83-Thao-Body-D%C3%A0i-Tay-W-C%E1%BB%95-Kh%C3%B3a-Ph%E1%BB%91i-Ch%C3%A2n-V%C3%A1y-X%E1%BA%BFp-Ly-Basic-H11-Ms444-i.1298531293.28892870218?extraParams=%7B%22display_model_id%22%3A286944113272%2C%22model_selection_logic%22%3A3%7D&sp_atk=934563cf-4038-4803-806e-59456bbe827e&xptdk=934563cf-4038-4803-806e-59456bbe827e",
-    "image": "/assets/img/products/ao-the-thao-body-dai-tay-w-co-khoa-phoi-chan-vay-xep-ly.webp",
-    "price_vnd": 309000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": false,
-    "status": true,
-    "updated_at": "2025-10-31T14:27:29.249Z"
-  },
-  {
     "sku": "ao-thun-nelly-couple-her-him-100-cotton",
     "name": "Áo thun NELLY - COUPLE \"HER-HIM\" 100% cotton",
     "merchant": "shopee",
@@ -169,32 +143,6 @@
     "updated_at": "2025-10-14T16:23:36.898Z"
   },
   {
-    "sku": "binh-giu-nhiet-hukan-hk-bgn504bd",
-    "name": "Bình giữ nhiệt HUKAN HK-BGN504BD",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/B%C3%ACnh-gi%E1%BB%AF-nhi%E1%BB%87t-HUKAN-HK-BGN504BD-Dung-t%C3%ADch-500ml-Gi%E1%BB%AF-nhi%E1%BB%87t-n%C3%B3ng-l%E1%BA%A1nh-C%C3%B3-hi%E1%BB%83n-th%E1%BB%8B-nhi%E1%BB%87t-%C4%91%E1%BB%99-i.319001815.43170676207",
-    "image": "/assets/img/products/binh-giu-nhiet-hukan-hk-bgn504bd.webp",
-    "price_vnd": 50000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": false,
-    "status": true,
-    "updated_at": "2025-10-01T08:24:12.311Z"
-  },
-  {
-    "sku": "bo-10-phu-kien-da-nang-hukan-g1-bpk10c",
-    "name": "Bộ 10 phụ kiện đa năng HUKAN G1-BPK10c",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/B%E1%BB%99-10-ph%E1%BB%A5-ki%E1%BB%87n-%C4%91a-n%C4%83ng-HUKAN-G1-BPK10c-5-M%C5%A9i-khoan-m%C5%A9i-v%C3%ADt-%C4%91a-n%C4%83ng-v%C3%A0-chuy%E1%BB%83n-t%E1%BB%AB-v%C3%ADt-sang-bulong-i.319001815.43522215862",
-    "image": "/assets/img/products/bo-10-phu-kien-da-nang-hukan-g1-bpk10c.webp",
-    "price_vnd": 180000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-01T08:21:41.995Z"
-  },
-  {
     "sku": "bo-ngu-nu-tay-dai-tieu-thu",
     "name": "Bộ ngủ nữ tay dài tiểu thư",
     "merchant": "shopee",
@@ -219,19 +167,6 @@
     "featured": false,
     "status": true,
     "updated_at": "2025-10-11T16:06:31.423Z"
-  },
-  {
-    "sku": "bo-quan-ao-ni-nam-nu-guno-co-tron",
-    "name": "Bộ Quần Áo Nỉ Nam Nữ GUNO Cổ Tròn",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/B%E1%BB%99-Qu%E1%BA%A7n-%C3%81o-N%E1%BB%89-Nam-N%E1%BB%AF-GUNO-C%E1%BB%95-Tr%C3%B2n-Logo-Th%C3%AAu-K%C3%A8m-Qu%E1%BA%A7n-Su%C3%B4ng-Set-B%E1%BB%99-Thu-%C4%90%C3%B4ng-Cao-C%E1%BA%A5p-SP5-25BG127-BB181-i.225457932.28290393380?sp_atk=a4d62aaa-7508-4f55-989f-3acc65f335d4&xptdk=a4d62aaa-7508-4f55-989f-3acc65f335d4",
-    "image": "/assets/img/products/bo-quan-ao-ni-nam-nu-guno-co-tron.webp",
-    "price_vnd": 249000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-11T16:00:54.285Z"
   },
   {
     "sku": "bo-serum-30ml-va-2-kem-duong-sieu-cap-am-va-giam-nep-nhan-15ml-x2-l-oreal-paris-revitalift",
@@ -376,19 +311,6 @@
     "updated_at": "2025-10-27T15:19:16.769Z"
   },
   {
-    "sku": "dove-serum-duong-sang-khu-mui-dove-danh-cho-nu-voi-3-niacinamide",
-    "name": "Dove Serum dưỡng sáng khử mùi Dove dành cho nữ với 3% Niacinamide",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/-CH%C3%8DNH-H%C3%83NG-Dove-Serum-d%C6%B0%E1%BB%A1ng-s%C3%A1ng-kh%E1%BB%AD-m%C3%B9i-Dove-d%C3%A0nh-cho-n%E1%BB%AF-v%E1%BB%9Bi-3-Niacinamide-gi%C3%BAp-da-s%C3%A1ng-m%E1%BB%8Bn-%C4%91%E1%BB%81u-m%C3%A0u-40ml-t%E1%BB%91t-nh%C6%B0-l%C4%83n-i.111138057.6931969733",
-    "image": "/assets/img/products/dove-serum-duong-sang-khu-mui-dove-danh-cho-nu-voi-3-niacinamide.webp",
-    "price_vnd": 83000,
-    "category": "my-pham",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-22T04:47:32.831Z"
-  },
-  {
     "sku": "hop-10-mieng-mat-na-giay-colorkey-luminous-vitamin-b5",
     "name": "Hộp 10 miếng Mặt Nạ Giấy COLORKEY LUMINOUS Vitamin B5",
     "merchant": "shopee",
@@ -441,19 +363,6 @@
     "updated_at": "2025-10-22T15:46:38.729Z"
   },
   {
-    "sku": "laser-lace-half-zip-ao-dai-tay-nu",
-    "name": "Laser Lace Half Zip Áo Dài Tay Nữ",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/Wilson-Women%27s-Laser-Lace-Half-Zip-%C3%81o-D%C3%A0i-Tay-N%E1%BB%AF-WW00556531-i.1362431986.28243324393?extraParams=%7B%22display_model_id%22%3A188767072334%2C%22model_selection_logic%22%3A3%7D&sp_atk=3122c0ad-8502-4661-ad61-f678598f963d&xptdk=3122c0ad-8502-4661-ad61-f678598f963d",
-    "image": "/assets/img/products/laser-lace-half-zip-ao-dai-tay-nu.webp",
-    "price_vnd": 3169000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-27T15:27:58.367Z"
-  },
-  {
     "name": "Nhẫn bạc nữ Miuu Silver, nhẫn nữ trái tim đính đá hồng Pinky Ring",
     "price_vnd": 144,
     "origin_url": "https://shopee.vn/-VOUCHER-100K-Nh%E1%BA%ABn-b%E1%BA%A1c-n%E1%BB%AF-Miuu-Silver-nh%E1%BA%ABn-n%E1%BB%AF-tr%C3%A1i-tim-%C4%91%C3%ADnh-%C4%91%C3%A1-h%E1%BB%93ng-Pinky-Ring-i.172288895.28977072588",
@@ -466,109 +375,5 @@
     "status": true,
     "updated_at": "2025-11-01T11:59:44.591Z",
     "deeplink": "https://go.isclix.com/deep_link/6837055118319564314/4751584435713464237?url=https%3A%2F%2Fshopee.vn%2F-VOUCHER-100K-Nh%25E1%25BA%25ABn-b%25E1%25BA%25A1c-n%25E1%25BB%25AF-Miuu-Silver-nh%25E1%25BA%25ABn-n%25E1%25BB%25AF-tr%25C3%25A1i-tim-%25C4%2591%25C3%25ADnh-%25C4%2591%25C3%25A1-h%25E1%25BB%2593ng-Pinky-Ring-i.172288895.28977072588&sub1=nhan-bac-nu-miuu-silver-nhan-nu-trai-tim-dinh-da-hong-pinky-ring&sub2=shopee&sub3=tool&sub4=tuyetlethi"
-  },
-  {
-    "sku": "set-3-mon-bigsize-nu-ao-so-mi-soc-dai-tay-phoi-ao-thun-hai-day",
-    "name": "Set 3 món Bigsize nữ áo sơ mi sọc dài tay phối áo thun hai dây",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/Set-3-m%C3%B3n-Bigsize-n%E1%BB%AF-%C3%A1o-s%C6%A1-mi-s%E1%BB%8Dc-d%C3%A0i-tay-ph%E1%BB%91i-%C3%A1o-thun-hai-d%C3%A2y-co-gi%C3%A3n-k%C3%A8m-qu%E1%BA%A7n-%C4%91%C3%B9i-d%C3%A1ng-A-n%C4%83ng-%C4%91%E1%BB%99ng-c%C3%A1-t%C3%ADnh-i.409338962.28032531056",
-    "image": "/assets/img/products/set-3-mon-bigsize-nu-ao-so-mi-soc-dai-tay-phoi-ao-thun-hai-day.webp",
-    "price_vnd": 44000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": false,
-    "status": true,
-    "updated_at": "2025-10-14T16:39:50.676Z"
-  },
-  {
-    "sku": "smoothie-tay-te-bao-chet-body-dove-cham-da-sang-min-298g",
-    "name": "Smoothie Tẩy Tế Bào Chết Body Dove Chăm Da Sáng Mịn 298g",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/-CH%C3%8DNH-H%C3%83NG-%C4%90%E1%BB%98C-QUY%E1%BB%80N-Smoothie-T%E1%BA%A9y-T%E1%BA%BF-B%C3%A0o-Ch%E1%BA%BFt-Body-Dove-Ch%C4%83m-Da-S%C3%A1ng-M%E1%BB%8Bn-298g-i.111138057.20567055749",
-    "image": "/assets/img/products/smoothie-tay-te-bao-chet-body-dove-cham-da-sang-min-298g.webp",
-    "price_vnd": 159000,
-    "category": "my-pham",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-22T04:44:31.775Z"
-  },
-  {
-    "sku": "sports-shorts-6-quan-short-the-thao-nam",
-    "name": "Sports Shorts 6' Quần Short Thể Thao Nam",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/Wilson-Daily-Sports-Shorts-6%27-Qu%E1%BA%A7n-Short-Th%E1%BB%83-Thao-Nam-WM20036412-i.1362431986.42952098158?extraParams=%7B%22display_model_id%22%3A218531106646%7D",
-    "image": "/assets/img/products/sports-shorts-6-quan-short-the-thao-nam.webp",
-    "price_vnd": 1899000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-27T15:31:49.176Z"
-  },
-  {
-    "sku": "suc-cross-de-cao-3cm-nu-hinh-jd-3d",
-    "name": "Sục Cross Đế Cao 3cm Nữ Hình JD 3D",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/S%E1%BB%A5c-Cross-%C4%90%E1%BA%BF-Cao-3cm-N%E1%BB%AF-H%C3%ACnh-JD-3D-D%C3%A9p-S%E1%BB%A5c-T%C3%B4ng-D%C3%A1ng-3-M%C3%A0u-Size-36-41-B%C3%A1ch-H%C3%B3a-GiayDep.-Store-i.1071797056.23760425338?extraParams=%7B%22display_model_id%22%3A295148155729%2C%22model_selection_logic%22%3A3%7D&sp_atk=4cb25c80-7916-4292-a505-f7b757788434&xptdk=4cb25c80-7916-4292-a505-f7b757788434",
-    "image": "/assets/img/products/suc-cross-de-cao-3cm-nu-hinh-jd-3d.webp",
-    "price_vnd": 109000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": false,
-    "status": true,
-    "updated_at": "2025-10-27T15:11:04.826Z"
-  },
-  {
-    "sku": "tui-canvas-dove-cao-cap",
-    "name": "Túi canvas dove cao cấp",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/-PC-gift-T%C3%BAi-canvas-dove-cao-c%E1%BA%A5p-i.111138057.40773519364",
-    "image": "/assets/img/products/tui-canvas-dove-cao-cap.webp",
-    "price_vnd": 150000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-22T15:37:50.466Z"
-  },
-  {
-    "sku": "vay-dang-xoe-cai-hoa-tra-co-sen-chat-lieu-da-text-mem-min",
-    "name": "Váy dáng xòe cài hoa trà, cổ sen, chất liệu dạ text mềm mịn",
-    "merchant": "shopee",
-    "origin_url": "https://shopee.vn/(Silent-Sound)-V%C3%A1y-d%C3%A1ng-x%C3%B2e-c%C3%A0i-hoa-tr%C3%A0-c%E1%BB%95-sen-ch%E1%BA%A5t-li%E1%BB%87u-d%E1%BA%A1-text-m%E1%BB%81m-m%E1%BB%8Bn-th%E1%BB%9Di-trang-n%E1%BB%AF-Calie-VX309-i.932349652.25547254306?extraParams=%7B%22display_model_id%22%3A301798749786%2C%22model_selection_logic%22%3A3%7D&sp_atk=3ab8c6c8-de32-48a2-80c9-58c00b173914&xptdk=3ab8c6c8-de32-48a2-80c9-58c00b173914",
-    "image": "/assets/img/products/vay-dang-xoe-cai-hoa-tra-co-sen-chat-lieu-da-text-mem-min.webp",
-    "price_vnd": 795000,
-    "category": "thoi-trang",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-10-27T15:16:42.934Z"
-  },
-  {
-    "sku": "BS-SM-001",
-    "name": "Áo Sơ Mi Trắng Nữ Rymola – Không nhăn, giấu nút, dễ phối đồ",
-    "merchant": "shopee",
-    "origin": "https://shopee.vn/%C3%81o-S%C6%A1-Mi-Tr%E1%BA%AFng-N%E1%BB%AF-Rymola-Kh%C3%B4ng-Nh%C4%83n-Gi%E1%BA%A5u-N%C3%BAt-Tay-D%C3%A0i-C%C3%B3-Bigsize-S%C6%A1-Mi-Tr%E1%BA%AFng-C%C3%B4ng-S%E1%BB%9F-Ch%E1%BA%A5t-V%E1%BA%A3i-Cotton-Form-Su%C3%B4ng-i.8496476.6342798120",
-    "image": "/assets/img/products/ao-so-mi-trang-nu-rymola.webp",
-    "price_vnd": 199000,
-    "category": "thoi-trang-nu",
-    "brand": "",
-    "featured": true,
-    "status": true,
-    "updated_at": "2025-11-19T07:00:00Z"
-  },
-  {
-    "sku": "BS-GD-001",
-    "name": "Sản phẩm gia dụng minh họa – chỗ này để test link Lazada",
-    "merchant": "lazada",
-    "origin": "https://www.lazada.vn/",
-    "image": "/assets/img/products/gia-dung-minh-hoa.webp",
-    "price_vnd": 123000,
-    "category": "gia-dung",
-    "brand": "",
-    "featured": false,
-    "status": true,
-    "updated_at": "2025-11-19T07:00:00Z"
   }
 ]
