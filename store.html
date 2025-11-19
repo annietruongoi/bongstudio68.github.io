@@ -441,16 +441,63 @@
         }
       }
 
+      // CHUẨN HÓA origin_url: xử được cả "https://shopee.vn/..." lẫn "shopee.vn/..."
+      function normalizeOriginUrl(originUrl, merchant) {
+        if (!originUrl) return "";
+        let url = String(originUrl).trim();
+
+        // Đã có http/https thì giữ nguyên
+        if (/^https?:\/\//i.test(url)) return url;
+
+        // Bắt đầu bằng //shopee.vn/...
+        if (url.startsWith("//")) return "https:" + url;
+
+        let lower = url.toLowerCase().replace(/^\/+/, "");
+
+        // Shopee
+        if (lower.startsWith("shopee.vn")) {
+          return "https://" + lower;
+        }
+
+        // Lazada
+        if (lower.startsWith("lazada.vn")) {
+          return "https://" + lower;
+        }
+
+        // Tiki
+        if (lower.startsWith("tiki.vn")) {
+          return "https://" + lower;
+        }
+
+        // TikTok / TikTok Shop
+        if (lower.startsWith("tiktokshop.com") || lower.startsWith("tiktok.com")) {
+          return "https://" + lower;
+        }
+
+        // Fallback: không nhận diện được thì cứ gắn https://
+        return "https://" + lower;
+      }
+
       function makeIsclixUrl(merchant, originUrl, sku) {
         const base = AFF_BASE[merchant];
-        if (!base || !originUrl) return originUrl;
-        const head = base + (base.includes("?") ? "&" : "?") + "url=" + encodeURIComponent(originUrl);
+        const normalized = normalizeOriginUrl(originUrl, merchant);
+
+        // Nếu chưa cấu hình aff cho merchant này thì trả link gốc cho an toàn
+        if (!base || !normalized) return normalized || originUrl;
+
+        const head =
+          base +
+          (base.includes("?") ? "&" : "?") +
+          "url=" +
+          encodeURIComponent(normalized);
+
         const params = [
           UTM_BASE,
           "utm_campaign=" + encodeURIComponent(merchant || ""),
           "sub1=" + encodeURIComponent(sku || ""),
           "sub2=" + encodeURIComponent(merchant || "")
         ];
+
         return head + "&" + params.join("&");
       }
 
