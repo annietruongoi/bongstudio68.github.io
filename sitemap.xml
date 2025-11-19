@@ -1,75 +1,18 @@
+<!-- REPLACE WHOLE FILE: /sitemap.xml -->
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NEW FILE: /sitemap.xml — bongstudio68 • MXD210 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Trang chủ -->
-  <url>
-    <loc>https://bongstudio68.github.io/</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- Cửa hàng tổng -->
-  <url>
-    <loc>https://bongstudio68.github.io/store.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Gia dụng, decor nhà cửa -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-gia-dung-decor-nha-cua.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Thời trang nữ -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-thoi-trang-nu.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Thời trang nam -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-thoi-trang-nam.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Quần áo em bé -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-quan-ao-em-be.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Sức khỏe, thực phẩm chức năng -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-suc-khoe-thuc-pham-chuc-nang.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Sách -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-sach.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Đồ ăn -->
-  <url>
-    <loc>https://bongstudio68.github.io/cat-do-an.html</loc>
-    <lastmod>2025-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://nthuong09.github.io/sitemap-pages.xml</loc>
+    <lastmod>2025-11-01</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://nthuong09.github.io/sitemap-store.xml</loc>
+    <lastmod>2025-11-01</lastmod>
+  </sitemap>
+  <!-- Optional: nếu có blog
+  <sitemap>
+    <loc>https://nthuong09.github.io/sitemap-blog.xml</loc>
+    <lastmod>2025-11-01</lastmod>
+  </sitemap>
+  -->
+</sitemapindex>
