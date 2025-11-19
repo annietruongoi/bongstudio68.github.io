@@ -1,4 +1,3 @@
-<!-- REPLACE WHOLE FILE: /index.html -->
 <!doctype html>
 <html lang="vi">
 <head>
@@ -29,10 +28,10 @@
     gtag('config', 'G-550F47VKPR');
   </script>
 
-  <!-- CSS chính (giữ nguyên file hiện tại của Bongstudio) -->
+  <!-- CSS nền của Bongstudio -->
   <link rel="stylesheet" href="/assets/css/styles.css"/>
 
-  <!-- Style đen – hồng cho Bongstudio -->
+  <!-- Style đen – hồng + layout index -->
   <style>
     :root {
       --bg: #050816;
@@ -48,37 +47,106 @@
       --ok: #4ade80;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
       color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     a {
       color: inherit;
     }
 
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* HEADER */
+    .site-header {
+      border-bottom: 1px solid rgba(148,163,184,.3);
+      background: rgba(15,23,42,.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .6rem 0;
+      gap: .75rem;
+    }
+    .logo {
+      text-decoration: none;
+      color: inherit;
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .logo-main {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--accent-soft);
+    }
+    .logo-sub {
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: .6rem;
+      padding: 0;
+      margin: 0;
+      font-size: .85rem;
+    }
+    .main-nav a {
+      text-decoration: none;
+      padding: .32rem .65rem;
+      border-radius: 999px;
+      color: var(--text-muted);
+    }
+    .main-nav a:hover {
+      color: #e5e7eb;
+    }
+    .main-nav a.is-active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* HERO */
     .home-hero {
-      padding: 2.5rem 0 1.5rem;
+      padding: 2rem 0 1.5rem;
       background: linear-gradient(135deg, #020617 0%, #0b1120 45%, #111827 100%);
     }
     .home-hero h1 {
-      font-size: 1.6rem;
-      margin-bottom: .5rem;
+      font-size: 1.7rem;
+      margin: 0 0 .5rem;
       color: #fff;
     }
     .home-hero p {
       max-width: 640px;
       font-size: .95rem;
       color: var(--text-muted);
+      margin: 0;
     }
     .home-hero-actions {
-      margin-top: 1.25rem;
+      margin-top: 1.1rem;
       display: flex;
       flex-wrap: wrap;
-      gap: .75rem;
+      gap: .6rem;
     }
 
     .btn-primary,
@@ -86,9 +154,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: .65rem 1.2rem;
+      padding: .55rem 1.1rem;
       border-radius: 999px;
-      font-size: .9rem;
+      font-size: .88rem;
       text-decoration: none;
       border: 1px solid var(--accent-soft);
       cursor: pointer;
@@ -117,39 +185,9 @@
       border-color: var(--accent);
     }
 
+    /* CATEGORIES */
     .home-categories {
       padding: 1.5rem 0 1rem;
-      background: transparent;
-    }
-    .home-categories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: .75rem;
-    }
-    .category-card {
-      display: block;
-      padding: .8rem .9rem;
-      border-radius: .9rem;
-      border: 1px solid var(--border-soft);
-      background: rgba(15,23,42,.9);
-      text-decoration: none;
-      font-size: .9rem;
-      line-height: 1.35;
-      color: var(--text-main);
-    }
-    .category-card strong {
-      display: block;
-      margin-bottom: .15rem;
-      font-size: .92rem;
-      color: #e5e7eb;
-    }
-    .category-card span {
-      display: block;
-      color: var(--text-muted);
-    }
-
-    .home-products {
-      padding: 1.5rem 0 2.25rem;
     }
     .home-section-head {
       display: flex;
@@ -168,26 +206,50 @@
       color: var(--text-muted);
       margin: 0;
     }
+    .home-categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: .75rem;
+    }
+    .category-card {
+      display: block;
+      padding: .75rem .85rem;
+      border-radius: .9rem;
+      border: 1px solid var(--border-soft);
+      background: rgba(15,23,42,.9);
+      text-decoration: none;
+      font-size: .88rem;
+      line-height: 1.35;
+      color: var(--text-main);
+    }
+    .category-card strong {
+      display: block;
+      margin-bottom: .15rem;
+      font-size: .92rem;
+      color: #e5e7eb;
+    }
+    .category-card span {
+      display: block;
+      color: var(--text-muted);
+    }
 
+    /* PRODUCTS */
+    .home-products {
+      padding: 1.5rem 0 2.25rem;
+    }
     .home-status {
       font-size: .8rem;
       color: var(--text-muted);
       text-align: right;
       min-height: 1.2em;
     }
-    .home-status[data-tone="error"] {
-      color: var(--error);
-    }
-    .home-status[data-tone="warn"] {
-      color: var(--warn);
-    }
-    .home-status[data-tone="ok"] {
-      color: var(--ok);
-    }
+    .home-status[data-tone="error"] { color: var(--error); }
+    .home-status[data-tone="warn"] { color: var(--warn); }
+    .home-status[data-tone="ok"]   { color: var(--ok); }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       gap: .9rem;
     }
     .product-card {
@@ -222,7 +284,7 @@
     .product-name {
       font-size: .95rem;
       line-height: 1.4;
-      max-height: 2.8em; /* ~2 dòng */
+      max-height: 2.8em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -256,13 +318,14 @@
     }
     .btn-buy {
       flex: 1;
-      font-size: .85rem;
+      font-size: .8rem;
+      padding: .5rem .75rem;
     }
     .btn-secondary {
-      padding: .55rem .8rem;
+      padding: .5rem .75rem;
       border-radius: .75rem;
       border: 1px solid var(--border-soft);
-      font-size: .82rem;
+      font-size: .8rem;
       background: rgba(15,23,42,.7);
       text-decoration: none;
       display: inline-flex;
@@ -275,62 +338,14 @@
       color: #e5e7eb;
     }
 
-    .site-header {
-      border-bottom: 1px solid rgba(148,163,184,.3);
-      background: rgba(15,23,42,.95);
-      backdrop-filter: blur(10px);
-    }
-    .site-header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .6rem 0;
-      gap: .75rem;
-    }
-    .logo {
-      text-decoration: none;
-      color: inherit;
-      display: inline-flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .logo-main {
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--accent-soft);
-    }
-    .logo-sub {
-      font-size: .8rem;
-      color: var(--text-muted);
-    }
-    .main-nav ul {
-      list-style: none;
-      display: flex;
-      gap: .75rem;
-      padding: 0;
-      margin: 0;
-      font-size: .85rem;
-    }
-    .main-nav a {
-      text-decoration: none;
-      padding: .35rem .6rem;
-      border-radius: 999px;
-      color: var(--text-muted);
-    }
-    .main-nav a:hover {
-      color: #e5e7eb;
-    }
-    .main-nav a[data-nav="home"].is-active {
-      background: var(--accent);
-      color: #fff;
-    }
-
+    /* FOOTER */
     .site-footer {
       border-top: 1px solid rgba(148,163,184,.2);
       padding: 1rem 0 1.5rem;
       font-size: .85rem;
       background: #020617;
       color: var(--text-muted);
+      margin-top: auto;
     }
     .site-footer strong {
       color: #e5e7eb;
@@ -339,12 +354,7 @@
       color: var(--accent-soft);
     }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 640px) {
       .site-header .container {
         flex-direction: column;
@@ -353,6 +363,20 @@
       .main-nav ul {
         flex-wrap: wrap;
         justify-content: flex-start;
+      }
+      .home-hero {
+        padding: 1.5rem 0 1.2rem;
+      }
+      .home-hero h1 {
+        font-size: 1.4rem;
+      }
+      .home-hero-actions {
+        width: 100%;
+      }
+      .home-hero-actions .btn-primary,
+      .home-hero-actions .btn-ghost {
+        flex: 1;
+        justify-content: center;
       }
     }
   </style>
@@ -374,7 +398,7 @@
   </header>
 
   <main>
-    <!-- HERO: giới thiệu nhanh -->
+    <!-- HERO -->
     <section class="home-hero">
       <div class="container">
         <h1>Chọn sản phẩm, Bongstudio lọc deal giúp bạn</h1>
@@ -392,7 +416,7 @@
       </div>
     </section>
 
-    <!-- DANH MỤC NỔI BẬT -->
+    <!-- DANH MỤC -->
     <section class="home-categories">
       <div class="container">
         <div class="home-section-head">
@@ -434,7 +458,7 @@
       </div>
     </section>
 
-    <!-- SẢN PHẨM NỔI BẬT: ĐỌC TỪ affiliates.json, TỐI ĐA 100 SP -->
+    <!-- SẢN PHẨM NỔI BẬT -->
     <section class="home-products">
       <div class="container">
         <div class="home-section-head">
@@ -470,7 +494,7 @@
     </div>
   </footer>
 
-  <!-- SCRIPT: ĐỌC affiliates.json, LỌC featured, TỐI ĐA 100 SP, SINH ISCLIX + GA4 -->
+  <!-- SCRIPT: đọc affiliates.json, lọc featured, sinh isclix + GA4 -->
   <script>
     ;(function () {
       const GRID   = document.getElementById("homeFeaturedGrid");
@@ -512,7 +536,7 @@
         if (v.includes("shopee")) return "shopee";
         if (v.includes("lazada")) return "lazada";
         if (v.includes("tiki"))   return "tiki";
-        if (v.includes("tik"))    return "tiktok"; // tik tok, tiktokshop, v.v.
+        if (v.includes("tik"))    return "tiktok"; // tik tok, tiktokshop...
         return v;
       }
 
@@ -562,20 +586,21 @@
                 ) +
               '</div>' +
               '<div class="product-actions">' +
-                '<button class="btn-primary btn-buy js-mxd-buy" type="button">' +
+                '<a class="btn-primary btn-buy js-mxd-buy" href="#" target="_blank" rel="noopener">' +
                   'Mua trên ' + escapeHtml(merchantLabel(merchant)) +
-                '</button>' +
+                '</a>' +
                 '<a class="btn-secondary" href="/store.html">Xem thêm</a>' +
               '</div>' +
             '</div>' +
           '</article>';
       }
 
-      // Gốc deeplink của AccessTrade cho Bongstudio
+      /* Gốc deeplink AccessTrade – Bongstudio */
       const AFF_BASE = {
         shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237",
         lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578",
         tiktok: "https://go.isclix.com/deep_link/6837508078414670452/6648523843406889655"
+        // tiki: (chưa có, sẽ dùng origin_url trực tiếp)
       };
 
       const UTM_BASE =
@@ -611,14 +636,16 @@
           const productNameEl = card.querySelector(".product-name");
           const productName   = productNameEl ? productNameEl.textContent.trim() : "";
 
-          const finalUrl = makeIsclixUrl(base, origin, sku, merchant);
+          const finalUrl = makeIsclixUrl(base, origin, sku, merchant) || origin;
+          if (!finalUrl) return;
+
+          // để chuột phải copy được link
+          btn.setAttribute("href", finalUrl);
 
           btn.addEventListener("click", function (ev) {
             ev.preventDefault();
-            const urlToOpen = finalUrl || origin;
-            if (!urlToOpen) return;
+            const urlToOpen = finalUrl;
 
-            // GA4 event (nếu gtag có sẵn)
             try {
               if (typeof window.gtag === "function") {
                 window.gtag("event", "click_buy", {
@@ -665,7 +692,6 @@
             return p.featured === true || p.featured === "true" || p.featured === 1;
           });
 
-          // Giới hạn 100 sản phẩm
           featured = featured.slice(0, 100);
 
           if (!featured.length) {
@@ -676,7 +702,6 @@
 
           GRID.innerHTML = featured.map(buildCard).join("");
           wireBuyButtons();
-
           setStatus("Đang hiển thị " + featured.length + " sản phẩm nổi bật.", "ok");
         } catch (err) {
           console.error("[Bongstudio][home-featured] Lỗi:", err);
