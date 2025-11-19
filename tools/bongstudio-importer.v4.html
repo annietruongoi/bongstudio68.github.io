@@ -8,171 +8,57 @@
   <meta name="robots" content="noindex,follow"/>
   <style>
     :root{
-      /* Palette Bongstudio: nền tím rất nhạt, accent hồng */
-      --bg:#faf5ff;
-      --fg:#111827;
-      --muted:#6b7280;
-      --b:#ffffff;
-      --line:#e5e7eb;
-      --accent:#ec4899;
-      --ok:#16a34a;
-      --warn:#f59e0b;
-      --err:#ef4444;
-      --toast-bottom:12px;
+      /* Palette Bongstudio: tím nhạt + hồng */
+      --bg:#faf5ff; --fg:#111827; --muted:#6b7280; --b:#ffffff; --line:#e5e7eb; --accent:#ec4899;
+      --ok:#16a34a; --warn:#f59e0b; --err:#ef4444; --toast-bottom:12px;
     }
     body.dark{
-      --bg:#050716;
-      --fg:#e5e7eb;
-      --muted:#9ca3af;
-      --b:#0f172a;
-      --line:#1f2937;
-      --accent:#fb7185;
-      --ok:#22c55e;
-      --warn:#facc15;
-      --err:#f97373;
+      --bg:#050716; --fg:#e5e7eb; --muted:#9ca3af; --b:#0f172a; --line:#1f2937; --accent:#fb7185;
+      --ok:#22c55e; --warn:#facc15; --err:#f97373;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto
-    }
+    body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto}
     h1,h2{margin:16px 0 8px}
-    h1{font-size:22px}
+    h1{font-size:20px}
     h2{font-size:16px;color:var(--accent)}
     a{color:var(--accent)}
     .wrap{max-width:1160px;margin:0 auto;padding:16px}
     .grid{display:grid;gap:12px}
     .g2{grid-template-columns:1fr 1fr}
-    .card{
-      background:var(--b);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:14px;
-      box-shadow:0 6px 16px rgba(15,23,42,0.04);
-    }
+    .card{background:var(--b);border:1px solid var(--line);border-radius:12px;padding:14px}
     label{display:block;font-weight:700;margin:8px 0 6px}
-    input,select,textarea,button{
-      width:100%;
-      padding:10px;
-      border-radius:10px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:#111;
-    }
-    body.dark input,
-    body.dark select,
-    body.dark textarea{
-      background:#020617;
-      color:var(--fg);
-      border-color:#1f2937;
-    }
+    input,select,textarea,button{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff;color:#111}
+    body.dark input,body.dark select,body.dark textarea{background:#020617;color:var(--fg);border-color:#1f2937}
     textarea{min-height:70px;resize:vertical}
     .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     .row>*{flex:1}
     .small{font-size:12px;color:var(--muted)}
-    .btn{
-      cursor:pointer;
-      border:1px solid var(--line);
-      background:#fdf2ff;
-    }
+    .btn{cursor:pointer;border:1px solid var(--line);background:#fdf2ff}
     .btn:hover{background:#fce7f3}
-    body.dark .btn{
-      background:#111827;
-      border-color:#374151;
-    }
+    body.dark .btn{background:#111827;border-color:#374151}
     body.dark .btn:hover{background:#1f2937}
-    .btn.primary{
-      background:var(--accent);
-      color:#fff;
-      border-color:var(--accent);
-    }
+    .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
     .btn.primary:hover{filter:brightness(0.98)}
-    .pill{
-      display:inline-block;
-      padding:2px 8px;
-      border-radius:999px;
-      font-size:12px;
-      border:1px solid rgba(236,72,153,0.25);
-      background:rgba(236,72,153,0.06);
-      color:var(--accent);
-    }
-    .ok{color:var(--ok)}
-    .warn{color:var(--warn)}
-    .err{color:var(--err)}
-    .drop{
-      border:2px dashed var(--line);
-      border-radius:12px;
-      padding:16px;
-      text-align:center;
-      background:#fdf4ff;
-    }
-    body.dark .drop{
-      background:#020617;
-      border-color:#334155;
-    }
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
+    .drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;background:#fdf4ff}
+    body.dark .drop{background:#020617;border-color:#334155}
     .drop.dragover{border-color:var(--accent)}
     .preview{display:flex;gap:12px;align-items:center}
-    .preview img{
-      width:96px;
-      height:96px;
-      object-fit:cover;
-      border-radius:10px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .toast{
-      position:fixed;
-      right:12px;
-      bottom:var(--toast-bottom);
-      display:none;
-      max-width:520px;
-      background:var(--b);
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:12px;
-      box-shadow:0 10px 30px #0008;
-      z-index:99999;
-      pointer-events:none
-    }
+    .preview img{width:96px;height:96px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+    .toast{position:fixed;right:12px;bottom:var(--toast-bottom);display:none;max-width:520px;background:var(--b);border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:0 10px 30px #0008;z-index:99999;pointer-events:none}
     .toast.show{display:block}
-    code.inline{
-      background:#fdf2ff;
-      border:1px solid var(--line);
-      border-radius:6px;
-      padding:2px 6px;
-    }
-    .badge{
-      display:inline-block;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:2px 8px;
-      font-size:11px;
-    }
+    code.inline{background:#fdf2ff;border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:11px}
     table.queue{width:100%;border-collapse:separate;border-spacing:0 8px}
     table.queue th, table.queue td{font-size:13px;vertical-align:middle}
     table.queue th{text-align:left;padding:6px 8px}
-    table.queue td{
-      background:#fdf4ff;
-      border:1px solid var(--line);
-      padding:6px 8px;
-    }
-    body.dark table.queue td{
-      background:#020617;
-      border-color:#1f2937;
-    }
+    table.queue td{background:#fdf4ff;border:1px solid var(--line);padding:6px 8px}
+    body.dark table.queue td{background:#020617;border-color:#1f2937}
     table.queue td:first-child{border-radius:10px 0 0 10px}
     table.queue td:last-child{border-radius:0 10px 10px 0}
-    .thumb{
-      width:56px;
-      height:56px;
-      border-radius:8px;
-      object-fit:cover;
-      border:1px solid var(--line);
-      background:#fff;
-    }
+    .thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:#fff}
     .mini{display:flex;gap:6px;align-items:center}
     .w-auto{width:auto}
     .nowrap{white-space:nowrap}
@@ -180,32 +66,10 @@
     .controls{display:flex;gap:6px;flex-wrap:wrap}
     .status{font-size:12px}
     .muted{color:var(--muted)}
-    .sticky-actions{
-      position:sticky;
-      bottom:0;
-      background:linear-gradient(0deg,var(--bg) 60%,#0000);
-      padding:12px;
-      border-top:1px solid var(--line);
-      z-index:9;
-      backdrop-filter:blur(8px);
-    }
-    .topbar{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:8px;
-    }
+    .sticky-actions{position:sticky;bottom:0;background:linear-gradient(0deg,var(--bg) 60%,#0000);padding:12px;border-top:1px solid var(--line);z-index:9}
+    .topbar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
     .mode{width:auto}
-    .warnbar{
-      background:#fff5f5;
-      border:1px solid #fecaca;
-      color:#991b1b;
-      border-radius:10px;
-      padding:8px 10px;
-      font-size:13px;
-      margin:-6px 0 8px;
-    }
+    .warnbar{background:#fff5f5;border:1px solid #fecaca;color:#991b1b;border-radius:10px;padding:8px 10px;font-size:13px;margin:-6px 0 8px}
   </style>
 </head>
 <body>
@@ -228,17 +92,17 @@
     <h2>1) Cài đặt</h2>
     <div class="grid g2">
       <div><label>Worker Base URL</label><input id="workerUrl" placeholder="https://&lt;worker&gt;.&lt;account&gt;.workers.dev"/></div>
-      <div><label>X-Key (header bảo vệ Worker)</label><input id="xKey" placeholder="Ví dụ: bong-2025-super"/></div>
+      <div><label>X-Key (header bảo vệ Worker)</label><input id="xKey" placeholder="Ví dụ: bongstudio-2025-super"/></div>
     </div>
 
     <label>Template Shopee</label>
-    <input id="tplShopee" placeholder="https://go.isclix.com/deep_link/&lt;AFF_ID&gt;/475158...?..."/>
+    <input id="tplShopee" placeholder="https://go.isclix.com/deep_link/&lt;AFF_ID&gt;/&lt;475158...&gt;?url={url}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}"/>
 
     <label>Template Lazada</label>
-    <input id="tplLazada" placeholder="https://go.isclix.com/deep_link/&lt;AFF_ID&gt;/512714...?..."/>
+    <input id="tplLazada" placeholder="https://go.isclix.com/deep_link/&lt;AFF_ID&gt;/&lt;512714...&gt;?url={url}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}"/>
 
     <label>Template TikTok</label>
-    <input id="tplTiktok" placeholder="https://go.isclix.com/deep_link/&lt;AFF_ID&gt;/664852...?..."/>
+    <input id="tplTiktok" placeholder="https://go.isclix.com/deep_link/&lt;AFF_ID&gt;/&lt;664852...&gt;?url={url}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}"/>
 
     <div class="row" style="margin-top:8px">
       <button class="btn" id="btnDetectAff">Tự động lấy từ /assets/mxd-affiliate.js</button>
@@ -320,20 +184,14 @@
         </div>
         <div class="row">
           <div><label>Giá (VND, không chấm)</label><input id="price" data-clear type="number" placeholder="399000"/></div>
-          <div><label>Merchant</label>
-            <select id="merchant">
-              <option value="shopee">shopee</option>
-              <option value="lazada">lazada</option>
-              <option value="tiktok">tiktok</option>
-            </select>
-          </div>
+          <div><label>Merchant</label><select id="merchant"><option value="shopee">shopee</option><option value="lazada">lazada</option><option value="tiktok">tiktok</option></select></div>
         </div>
         <div><label>Link gốc (origin)</label><input id="origin" data-clear placeholder="https://shopee.vn/…"/></div>
         <div class="row">
           <div><label>Ảnh (đường dẫn)</label><input id="image" data-clear placeholder="/assets/img/products/ao-thun-nu-co-tron.webp"/></div>
           <div>
             <label>Danh mục (category)</label>
-            <input id="category" data-clear placeholder="gia-dung-decor / thoi-trang-nu / thoi-trang-nam / quan-ao-em-be / suc-khoe-tpcn / sach / do-an / khac" list="presetCats"/>
+            <input id="category" data-clear placeholder="gia-dung-decor / thoi-trang-nu / thoi-trang-nam…" list="presetCats"/>
             <datalist id="presetCats">
               <option value="gia-dung-decor"></option>
               <option value="thoi-trang-nu"></option>
@@ -348,12 +206,8 @@
         </div>
         <div><label>Thương hiệu (brand)</label><input id="brand" data-clear placeholder="brand, hãng…"/></div>
         <div class="row">
-          <label style="display:flex;align-items:center;gap:8px;flex:unset">
-            <input type="checkbox" id="featured" style="width:auto"/> Nổi bật (featured)
-          </label>
-          <label style="display:flex;align-items:center;gap:8px;flex:unset">
-            <input type="checkbox" id="status" checked style="width:auto"/> Hiển thị (status)
-          </label>
+          <label style="display:flex;align-items:center;gap:8px;flex:unset"><input type="checkbox" id="featured" style="width:auto"/> Nổi bật (featured)</label>
+          <label style="display:flex;align-items:center;gap:8px;flex:unset"><input type="checkbox" id="status" checked style="width:auto"/> Hiển thị (status)</label>
           <button class="btn" id="btnAuto">Điền auto từ tên</button>
         </div>
         <div id="diag" class="small"></div>
@@ -371,12 +225,8 @@
     </div>
     <div style="overflow:auto;margin-top:10px">
       <table class="queue" id="queueBodyWrap">
-        <thead>
-        <tr>
-          <th>Ảnh</th><th>Tên xuất</th><th>Thư mục</th><th>Định dạng</th><th>Đường dẫn xuất</th><th>Kích thước</th><th>Trạng thái</th><th>Hành động</th>
-        </tr>
-        </thead>
-        <tbody id="queueBody"></tbody>
+        <thead><tr><th>Ảnh</th><th>Tên xuất</th><th>Thư mục</th><th>Định dạng</th><th>Đường dẫn xuất</th><th>Kích thước</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+      <tbody id="queueBody"></tbody>
       </table>
     </div>
   </div>
@@ -413,7 +263,7 @@
     <div class="row" style="margin-top:8px">
       <button class="btn" id="btnToJson">Tạo JSON</button>
       <button class="btn" id="btnCopyJson">Copy JSON</button>
-      <button class="btn" id="btnDownloadJson">Tải bongstudio-products.json</button>
+      <button class="btn" id="btnDownloadJson">Tải bongstudio-products.append.json</button>
     </div>
   </div>
 
@@ -421,16 +271,16 @@
     <h2>6) Worker Debug</h2>
     <div class="row">
       <button class="btn" id="btnProbeOptions">Probe OPTIONS /upload-image</button>
-      <button class="btn" id="btnProbePublish">Probe OPTIONS /git/json</button>
+      <button class="btn" id="btnProbePublish">Probe OPTIONS /publish</button>
       <span class="small muted">Log dưới giúp phân biệt: CORS / Auth / Payload.</span>
     </div>
-    <div id="debugLog" class="small" style="background:var(--b);border:1px solid var(--line);border-radius:10px;padding:10px;max-height:220px;overflow:auto">–</div>
+    <div id="debugLog" class="small" style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;max-height:220px;overflow:auto">–</div>
   </div>
 
   <div class="sticky-actions row">
-    <button class="btn primary" id="btnPublish">Publish → Lưu JSON</button>
-    <button class="btn" id="btnPublishFeatured">Publish → Lưu JSON + Nổi bật</button>
-    <button class="btn" id="btnVerify">✅ Kiểm tra file JSON</button>
+    <button class="btn primary" id="btnPublish">Publish → Store</button>
+    <button class="btn" id="btnPublishFeatured">Publish → Nổi bật</button>
+    <button class="btn" id="btnVerify">✅ Kiểm tra trong bongstudio-products.json</button>
     <button class="btn" id="btnGenCommit">Gen commit message</button>
     <input id="commitMsg" readonly/>
   </div>
@@ -439,7 +289,7 @@
 </div>
 
 <script>
-/* ===== Bongstudio Importer v4.4.0-pro5 ===== */
+/* ===== Bongstudio Importer v4.4 (base: MXD-TOOL v4.3.9-pro4) ===== */
 function initImporter() {
   const $ = s => document.querySelector(s);
 
@@ -448,13 +298,9 @@ function initImporter() {
     const h=(location.hostname||'').toLowerCase(); const m=h.match(/^([a-z0-9-]+)/);
     return (m?m[1]:'mxd').replace(/[^a-z0-9-]/g,'')||'mxd';
   })();
-
-  /* Đường dẫn kho JSON chính cho Bongstudio (kho sản phẩm chung) */
-  const PRODUCTS_JSON_PATH = "/assets/data/bongstudio-products.json";
-
-  document.title = `${SITE_ID} Importer v4.4.0 — PRO + Batch + Featured + Debug`;
+  document.title = `${SITE_ID} Importer v4.4 — PRO + Batch + Featured + Debug`;
   const titleEl=$("#title");
-  if(titleEl) titleEl.innerHTML = `${SITE_ID} Importer v4.4.0 <span class="pill">PRO</span> <span class="pill">Batch</span> <span class="pill">Featured</span> <span class="pill">Debug</span>`;
+  if(titleEl) titleEl.innerHTML = `${SITE_ID} Importer v4.4 <span class="pill">PRO</span> <span class="pill">Batch</span> <span class="pill">Featured</span> <span class="pill">Debug</span>`;
 
   const slugify = s => s.toString()
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -462,14 +308,11 @@ function initImporter() {
     .toLowerCase().replace(/[^a-z0-9]+/g,'-')
     .replace(/^-+|-+$/g,'');
 
-  const LS_KEY = `MXD_IMPORTER_SETTINGS_V440PRO5_${SITE_ID.toUpperCase()}`;
+  const LS_KEY = `BONG_IMPORTER_V44_${SITE_ID.toUpperCase()}`;
+  const PRODUCTS_JSON_PATH = "/assets/data/bongstudio-products.json";
 
-  /* Default template AFF cho Bongstudio (cậu đưa) */
-  const DEFAULT_TPL = {
-    shopee: "https://go.isclix.com/deep_link/6837508078414670452/4751584435713464237?url={url}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}",
-    lazada: "https://go.isclix.com/deep_link/6837508078414670452/5127144557053758578?url={url}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}",
-    tiktok: "https://go.isclix.com/deep_link/6837508078414670452/6648523843406889655?url={url}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}"
-  };
+  /* Để an toàn không hardcode ID ai cả – chỉ autodetect từ mxd-affiliate.js */
+  const DEFAULT_TPL = '';
 
   const state = { imgBlob:null, imgName:null, imgW:0, imgH:0 };
 
@@ -481,10 +324,7 @@ function initImporter() {
   updateToastOffset(); window.addEventListener('resize', updateToastOffset);
 
   /* Theme + quick clears */
-  $("#btnMode").onclick=()=>{
-    document.body.classList.toggle('dark');
-    $("#btnMode").textContent=document.body.classList.contains('dark')?'Light mode':'Dark mode';
-  };
+  $("#btnMode").onclick=()=>{ document.body.classList.toggle('dark'); $("#btnMode").textContent=document.body.classList.contains('dark')?'Light mode':'Dark mode'; };
   $("#btnClearLog").onclick=()=>{ $("#debugLog").textContent='–'; toast('Đã xoá log.'); };
   $("#btnClearFormQuick").onclick=()=>{
     document.querySelectorAll('[data-clear]').forEach(el=>el.value='');
@@ -498,18 +338,16 @@ function initImporter() {
   /* Settings */
   function readSettings(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'{}'); }catch(_){ return {}; } }
   function writeSettings(s){ localStorage.setItem(LS_KEY, JSON.stringify(s)); }
-  function uiToSettings(){
-    return {
-      workerUrl:$("#workerUrl").value.trim(),
-      xKey:$("#xKey").value.trim(),
-      tplShopee:$("#tplShopee").value.trim(),
-      tplLazada:$("#tplLazada").value.trim(),
-      tplTiktok:$("#tplTiktok").value.trim(),
-      defaultFolder:$("#defaultFolder").value,
-      defaultCustomPath:$("#defaultCustomPath").value.trim(),
-      defaultFmt:$("#defaultFmt").value
-    };
-  }
+  function uiToSettings(){ return {
+    workerUrl:$("#workerUrl").value.trim(),
+    xKey:$("#xKey").value.trim(),
+    tplShopee:$("#tplShopee").value.trim() || DEFAULT_TPL,
+    tplLazada:$("#tplLazada").value.trim() || DEFAULT_TPL,
+    tplTiktok:$("#tplTiktok").value.trim() || DEFAULT_TPL,
+    defaultFolder:$("#defaultFolder").value,
+    defaultCustomPath:$("#defaultCustomPath").value.trim(),
+    defaultFmt:$("#defaultFmt").value
+  }; }
   function settingsToUi(s){
     $("#workerUrl").value=s.workerUrl||'';
     $("#xKey").value=s.xKey||'';
@@ -522,26 +360,11 @@ function initImporter() {
     ensureFolderBase(); updateSingleUploadCta();
     checkAffTemplatesWarn();
   }
-  function saveSettings(){
-    writeSettings(uiToSettings());
-    $("#settingsStatus").textContent="Đã lưu.";
-    toast("Đã lưu cài đặt.","ok");
-    checkAffTemplatesWarn();
-  }
-  function loadSettings(){
-    const s=readSettings();
-    settingsToUi(s);
-    $("#settingsStatus").textContent="Đã tải cài đặt.";
-  }
+  function saveSettings(){ writeSettings(uiToSettings()); $("#settingsStatus").textContent="Đã lưu."; toast("Đã lưu cài đặt.","ok"); checkAffTemplatesWarn(); }
+  function loadSettings(){ const s=readSettings(); settingsToUi(s); $("#settingsStatus").textContent="Đã tải cài đặt."; }
   $("#btnSaveSettings").onclick=saveSettings;
   $("#btnLoadSettings").onclick=loadSettings;
-  $("#btnClearSettings").onclick=()=>{
-    localStorage.removeItem(LS_KEY);
-    settingsToUi({});
-    $("#settingsStatus").textContent="Đã xóa.";
-    toast('Đã xoá cài đặt.');
-    checkAffTemplatesWarn();
-  };
+  $("#btnClearSettings").onclick=()=>{ localStorage.removeItem(LS_KEY); settingsToUi({}); $("#settingsStatus").textContent="Đã xóa."; toast('Đã xoá cài đặt.'); checkAffTemplatesWarn(); };
   loadSettings();
 
   /* Tự động lấy ID từ /assets/mxd-affiliate.js (nếu có) */
@@ -590,13 +413,11 @@ function initImporter() {
 
   function checkAffTemplatesWarn(){
     const s=readSettings();
-    const haveUser = s.tplShopee || s.tplLazada || s.tplTiktok;
-    const haveDefault = DEFAULT_TPL.shopee || DEFAULT_TPL.lazada || DEFAULT_TPL.tiktok;
-    const bad = !(haveUser || haveDefault);
+    const bad = (!s.tplShopee && !s.tplLazada && !s.tplTiktok);
     showWarn(bad);
   }
 
-  /* Headers + baseUrl + checks */
+  /* Headers + baseUrl + checks (method-aware) */
   function hdr(method='GET', useKey=true){
     const h={};
     if(['POST','PUT','PATCH'].includes(method)) h['content-type']='application/json';
@@ -613,15 +434,11 @@ function initImporter() {
       return {ok:false,status:-1,text:String(e)};
     }
   }
-  function baseUrl(){
-    const s=readSettings();
-    return (s.workerUrl||'').replace(/\/$/,'');
-  }
+  function baseUrl(){ const s=readSettings(); return (s.workerUrl||'').replace(/\/$/,''); }
 
   $("#btnCheckWorker").onclick=async()=>{
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
-    const u=b+"/health";
-    const r=await check(u,false);
+    const u=b+"/health"; const r=await check(u,false);
     const msg=r.ok?`Worker OK (${r.status})`:`Worker lỗi (${r.status})`;
     $("#workerStatus").textContent=msg;
     log("[/health] "+msg+" — "+r.text.slice(0,120));
@@ -629,16 +446,14 @@ function initImporter() {
   };
   $("#btnCheckAuth").onclick=async()=>{
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
-    const u=b+"/whoami";
-    const r=await check(u,true);
+    const u=b+"/whoami"; const r=await check(u,true);
     const msg=r.ok?"X-Key hợp lệ.":"X-Key không hợp lệ ("+r.status+")";
     log("[/whoami] "+msg+" — "+r.text.slice(0,120));
     toast(msg, r.ok?"ok":"err");
   };
   $("#btnCheckWrite").onclick=async()=>{
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
-    const u=b+"/can-write";
-    const r=await check(u,true);
+    const u=b+"/can-write"; const r=await check(u,true);
     const msg=r.ok?"Có quyền commit.":"Không có quyền ("+r.status+")";
     log("[/can-write] "+msg+" — "+r.text.slice(0,120));
     toast(msg, r.ok?"ok":"err");
@@ -657,18 +472,17 @@ function initImporter() {
   $("#btnProbePublish").onclick=async()=>{
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
     try{
-      const r=await fetch(b+"/git/json",{method:"OPTIONS",mode:"cors",cache:"no-cache",headers:hdr('OPTIONS',true)});
-      log(`[OPTIONS /git/json] ${r.status}`);
-      toast("Probe OPTIONS /git/json","ok");
+      const r=await fetch(b+"/publish",{method:"OPTIONS",mode:"cors",cache:"no-cache",headers:hdr('OPTIONS',true)});
+      log(`[OPTIONS /publish] ${r.status}`);
+      toast("Probe OPTIONS /publish","ok");
     }catch(e){
-      log("[OPTIONS /git/json] Lỗi: "+e.message);
+      log("[OPTIONS /publish] Lỗi: "+e.message);
       toast("Probe lỗi.","err");
     }
   };
   $("#btnTestUpload").onclick=async()=>{
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
-    const c=document.createElement('canvas');
-    c.width=1; c.height=1;
+    const c=document.createElement('canvas'); c.width=1; c.height=1;
     const blob=await new Promise(res=>c.toBlob(res,'image/webp',0.5));
     const dataUrl=await blobToDataURL(blob);
     try{
@@ -691,14 +505,12 @@ function initImporter() {
     .replace(/đ/g,'d').replace(/Đ/g,'D')
     .toLowerCase();
 
-  function computeSubs(sku, merchant){
-    return {
-      sub1: sku||'sku',
-      sub2:(merchant||'merchant').toLowerCase(),
-      sub3:'tool',
-      sub4:SITE_ID
-    };
-  }
+  function computeSubs(sku, merchant){ return {
+    sub1: sku||'sku',
+    sub2:(merchant||'merchant').toLowerCase(),
+    sub3:'tool',
+    sub4:SITE_ID
+  }; }
   function ensureSubsInUrl(u, subs){
     const has = k => new RegExp(`[?&]${k}=`,`i`).test(u);
     const qs=[];
@@ -707,37 +519,25 @@ function initImporter() {
     return qs.length?(u+(u.includes('?')?'&':'?')+qs.join('&')):u;
   }
   function cleanUrl(u){ return (u||'').trim().replace(/^["']+|["',]+$/g,''); }
-
   function activeTplFor(merchant){
     const s=readSettings();
     const pick = merchant==='lazada'
-      ? (s.tplLazada || DEFAULT_TPL.lazada)
-      : (merchant==='tiktok'
-          ? (s.tplTiktok || DEFAULT_TPL.tiktok)
-          : (s.tplShopee || DEFAULT_TPL.shopee));
-    return pick || '';
+      ? s.tplLazada
+      : (merchant==='tiktok' ? s.tplTiktok : s.tplShopee);
+    return pick||'';
   }
-
   function validateDeeplink(){
-    const dl=$("#deeplink").value.trim();
-    const badge=$("#dlCheck");
+    const dl=$("#deeplink").value.trim(); const badge=$("#dlCheck");
     if(!dl){ badge.textContent="chưa có deeplink"; badge.className='badge'; return; }
     const okHost=/(^https?:\/\/)?([^/]*\.)?isclix\.com/i.test(dl);
     const hasUrl=/[?&]url=/.test(dl);
     const need=['sub1','sub2','sub3','sub4'];
     const missing=need.filter(k=>!new RegExp(`[?&]${k}=`).test(dl));
-    if(okHost && hasUrl && missing.length===0){
-      badge.textContent="OK affiliate"; badge.className='badge'; return;
-    }
-    if(okHost && !hasUrl){
-      badge.textContent="isclix thiếu url="; badge.className='badge'; return;
-    }
-    if(okHost){
-      badge.textContent="thiếu: "+missing.join(', '); badge.className='badge'; return;
-    }
+    if(okHost && hasUrl && missing.length===0){ badge.textContent="OK affiliate"; badge.className='badge'; return; }
+    if(okHost && !hasUrl){ badge.textContent="isclix thiếu url="; badge.className='badge'; return; }
+    if(okHost){ badge.textContent="thiếu: "+missing.join(', '); badge.className='badge'; return; }
     badge.textContent="KHÔNG qua affiliate"; badge.className='badge';
   }
-
   function makeDeeplink(){
     const origin=cleanUrl($("#origin").value.trim());
     const sku=$("#sku").value.trim();
@@ -761,44 +561,30 @@ function initImporter() {
     $("#deeplink").value=link;
     validateDeeplink();
   }
-
   $("#btnMakeDeeplink").onclick=makeDeeplink;
   $("#deeplink").addEventListener('input', validateDeeplink);
-  $("#copyOrigin").onclick=()=>{
-    const t=$("#originOut"); t.select(); document.execCommand('copy');
-    toast("Đã copy Origin.","ok");
-  };
-  $("#openOrigin").onclick=()=>{
-    const u=$("#originOut").value.trim()||$("#origin").value.trim();
-    if(u){ window.open(u,'_blank'); } else { toast("Chưa có Origin.","warn"); }
-  };
-  $("#copyDeeplink").onclick=()=>{
-    const t=$("#deeplink"); t.select(); document.execCommand('copy');
-    toast("Đã copy Deep-link.","ok");
-  };
-  $("#btnOpenDeeplink").onclick=()=>{
-    const u=$("#deeplink").value.trim();
-    if(u){ window.open(u,'_blank'); } else { toast("Chưa có Deep-link.","warn"); }
-  };
+  $("#copyOrigin").onclick=()=>{ const t=$("#originOut"); t.select(); document.execCommand('copy'); toast("Đã copy Origin.","ok"); };
+  $("#openOrigin").onclick=()=>{ const u=$("#originOut").value.trim()||$("#origin").value.trim(); if(u){ window.open(u,'_blank'); } else { toast("Chưa có Origin.","warn"); } };
+  $("#copyDeeplink").onclick=()=>{ const t=$("#deeplink"); t.select(); document.execCommand('copy'); toast("Đã copy Deep-link.","ok"); };
+  $("#btnOpenDeeplink").onclick=()=>{ const u=$("#deeplink").value.trim(); if(u){ window.open(u,'_blank'); } else { toast("Chưa có Deep-link.","warn"); } };
 
-  /* Category helpers cho bộ danh mục Bongstudio */
+  /* Category helpers cho Bongstudio */
   function guessCategory(text){
     const t = vn(text);
 
-    if(/\b(sach|sach giao khoa|truyen|tieu thuyet|book)\b/.test(t)) return 'sach';
-    if(/\b(banh|keo|snack|mi|mì|gao|gạo|do an|thuc an|an vat)\b/.test(t)) return 'do-an';
-    if(/\b(gia dung|noi|chao|noi com|noi cơm|noi chien|noi-chien|noi-chien-khong-dau|bep|sofa|ke|kệ|den|đèn|decor|trang tri|nha cua)\b/.test(t)) return 'gia-dung-decor';
-    if(/\b(em be|tre em|tre-so-sinh|so sinh|sosinh|baby|kids|nhi dong)\b/.test(t)) return 'quan-ao-em-be';
-    if(/\b(vitamin|collagen|omega|tp chuc nang|thuc pham chuc nang|tpcn|suc khoe)\b/.test(t)) return 'suc-khoe-tpcn';
+    if(/\b(sach|sách|truyen|truyện|novel|book)\b/.test(t)) return 'sach';
+    if(/\b(banh|bánh|keo|kẹo|snack|mi\b|mì\b|gao\b|gạo\b|do an|đồ ăn|thuc an|thức ăn|an vat|ăn vặt)\b/.test(t)) return 'do-an';
+    if(/\b(gia dung|gia-dung|noi\b|nồi\b|chao\b|chảo\b|noi com|nồi cơm|noi chien|nồi chiên|bep\b|bếp\b|sofa|kệ|ke\b|den\b|đèn\b|decor|trang tri|trang-tri|nha cua|nhà cửa)\b/.test(t)) return 'gia-dung-decor';
+    if(/\b(em be|bé|tre em|trẻ em|tre-so-sinh|sơ sinh|sosinh|baby|kids|nhi dong|nhi đồng)\b/.test(t)) return 'quan-ao-em-be';
+    if(/\b(vitamin|collagen|omega|tp chuc nang|thuc pham chuc nang|tpcn|suc khoe|sức khỏe)\b/.test(t)) return 'suc-khoe-tpcn';
 
-    // thời trang nữ vs nam
-    if(/\b(ao|áo|quan|quần|dam|đầm|chan vay|chân váy|vay|váy|jum|jumpsuit)\b/.test(t)){
-      if(/\b(nu|nữ|co gai|phu nu)\b/.test(t)) return 'thoi-trang-nu';
-      if(/\b(nam|men|ong)\b/.test(t)) return 'thoi-trang-nam';
-      // không rõ thì ưu tiên nữ
+    if(/\b(ao|áo|quan|quần|váy|vay|hoodie|giay|giày|dep|dép|jum|jumpsuit|chan vay|chân váy)\b/.test(t)){
+      if(/\b(nu|nữ|co gai|cô gái|phu nu|phụ nữ)\b/.test(t)) return 'thoi-trang-nu';
+      if(/\b(nam|men|đàn ông|ong\b)\b/.test(t)) return 'thoi-trang-nam';
       return 'thoi-trang-nu';
     }
-    if(/\b(so mi nam|ao so mi nam|quan au nam|ao khoac nam)\b/.test(t)) return 'thoi-trang-nam';
+    if(/\b(so mi nam|sơ mi nam|ao so mi nam|áo sơ mi nam|quan au nam|quần âu nam|ao khoac nam|áo khoác nam)\b/.test(t))
+      return 'thoi-trang-nam';
 
     return '';
   }
@@ -811,7 +597,10 @@ function initImporter() {
       .replace(/^-|-$/g,'');
 
     if(!base) return 'khac';
-    const canon = ['gia-dung-decor','thoi-trang-nu','thoi-trang-nam','quan-ao-em-be','suc-khoe-tpcn','sach','do-an','khac'];
+
+    const canon = ['gia-dung-decor','thoi-trang-nu','thoi-trang-nam',
+      'quan-ao-em-be','suc-khoe-tpcn','sach','do-an','khac'];
+
     if(canon.includes(base)) return base;
 
     const guessed = guessCategory(base);
@@ -840,14 +629,11 @@ function initImporter() {
   }
   function getSelectedFmt(){ return ($("#defaultFmt").value||'webp').toLowerCase(); }
   function extByFmt(fmt){ return fmt==='png'?'.png':'.webp'; }
-
   function updateSingleUploadCta(){
-    const folder=getSelectedFolder();
-    const fmt=getSelectedFmt();
+    const folder=getSelectedFolder(); const fmt=getSelectedFmt();
     const sku=($("#sku").value.trim()||'<sku>');
     $("#btnUploadImg").textContent=`Upload ảnh → ${folder}${slugify(sku)}${extByFmt(fmt)}`;
   }
-
   function runDiag(){
     const sku=$("#sku").value.trim();
     const img=$("#image").value.trim();
@@ -875,8 +661,12 @@ function initImporter() {
     const fmt=getSelectedFmt();
     if($("#sku").value && !$("#image").value)
       $("#image").value=`${folder}${slugify(baseSku)}${extByFmt(fmt)}`;
-    const g=autoCategory(`${name} ${$("#brand").value} ${$("#origin").value}`);
-    if(g && !$("#category").value.trim()) $("#category").value=g;
+    if(!$("#category").value.trim()){
+      const text=`${$("#name").value} ${$("#brand").value} ${$("#origin").value}`;
+      const g=autoCategory(text);
+      if(g) $("#category").value=g;
+    }
+    $("#category").value = normCategory($("#category").value);
     runDiag();
     updateSingleUploadCta();
   };
@@ -932,7 +722,6 @@ function initImporter() {
     if(nm) return slugify(nm);
     return 'tt';
   }
-
   function handleFiles(files){
     if(!files || !files.length) return;
     if(files.length===1){
@@ -942,7 +731,6 @@ function initImporter() {
       toast(`Đã thêm ${files.length} ảnh vào hàng đợi.`,'ok');
     }
   }
-
   function handleSingleFile(f){
     const reader=new FileReader();
     reader.onload=ev=>{
@@ -975,37 +763,6 @@ function initImporter() {
   }
 
   const queue=[]; let seq=0;
-
-  /* Thêm ảnh đang preview vào hàng đợi (nút ➕) */
-  const btnQueueCurrent = $("#btnQueueCurrent");
-  if (btnQueueCurrent) {
-    btnQueueCurrent.onclick = () => {
-      if (!state.imgBlob) {
-        toast("Chưa có ảnh đang xem để thêm vào hàng đợi.","warn");
-        return;
-      }
-      const rawSku = $("#sku").value.trim();
-      const name = rawSku ? slugify(rawSku) : (state.imgName ? slugify(state.imgName) : 'tt');
-      const fmt = getSelectedFmt();
-      const folder = getSelectedFolder();
-      const item = {
-        id: (++seq),
-        srcFile: null,
-        name,
-        fmt,
-        folder,
-        customPath: $("#defaultFolder").value === 'custom',
-        outBlob: state.imgBlob,
-        w: state.imgW,
-        h: state.imgH,
-        status: 'ready'
-      };
-      queue.push(item);
-      renderQueue();
-      toast("Đã thêm ảnh hiện tại vào hàng đợi.","ok");
-    };
-  }
-
   async function queueAddRawFile(file){
     const name=decideNameFor(file);
     const fmt=$("#defaultFmt").value||'webp';
@@ -1018,14 +775,13 @@ function initImporter() {
       folder,
       customPath:$("#defaultFolder").value==='custom',
       outBlob:null,
-      w:0,h:0,
+      w:0, h:0,
       status:'pending'
     };
     queue.push(item);
     await queueProcess(item);
     renderQueue();
   }
-
   async function queueProcess(it){
     if(it.outBlob && it.w && it.h){ it.status='ready'; return; }
     if(!it.srcFile){ it.status='error'; return; }
@@ -1044,13 +800,6 @@ function initImporter() {
     it.outBlob=await new Promise(res=>canvas.toBlob(res,mime,quality));
     it.w=w; it.h=h; it.status='ready';
   }
-
-  function pathFor(it){
-    let base=sanitizeFolder(it.folder||'/assets/img/');
-    const ext='.'+(it.fmt||'webp').toLowerCase();
-    return base+it.name+ext;
-  }
-
   function renderQueue(){
     const tbody=$("#queueBody");
     if(!queue.length){
@@ -1090,7 +839,6 @@ function initImporter() {
         </td>
       </tr>`;
     }).join('');
-
     tbody.querySelectorAll('tr').forEach(tr=>{
       const id=Number(tr.getAttribute('data-id'));
       const it=queue.find(x=>x.id===id);
@@ -1149,7 +897,11 @@ function initImporter() {
       tr.querySelector('.do-upload').onclick=()=>uploadItem(it, statusEl);
     });
   }
-
+  function pathFor(it){
+    let base=sanitizeFolder(it.folder||'/assets/img/');
+    const ext='.'+(it.fmt||'webp').toLowerCase();
+    return base+it.name+ext;
+  }
   function readFileAsDataURL(file){
     return new Promise((res,rej)=>{
       const r=new FileReader();
@@ -1180,7 +932,6 @@ function initImporter() {
     const quality = fmt==='png' ? 1.0 : 0.82;
     return await new Promise(res=>c.toBlob(res, mime, quality));
   }
-
   async function uploadItem(it, statusEl){
     let path=pathFor(it);
     try{
@@ -1242,25 +993,9 @@ function initImporter() {
     }
   }
 
-  $("#btnClearQueue").onclick=()=>{
-    queue.length=0;
-    renderQueue();
-    toast('Đã xoá hàng đợi.');
-  };
-  $("#btnConvertAll").onclick=async()=>{
-    for(const it of queue){ await queueProcess(it); }
-    toast("Đã convert tất cả.","ok");
-    renderQueue();
-  };
-  $("#btnDownloadAll").onclick=()=>{
-    for(const it of queue){
-      if(!it.outBlob) continue;
-      const a=document.createElement('a');
-      a.href=URL.createObjectURL(it.outBlob);
-      a.download=it.name+'.'+(it.fmt||'webp');
-      a.click();
-    }
-  };
+  $("#btnClearQueue").onclick=()=>{ queue.length=0; renderQueue(); toast('Đã xoá hàng đợi.'); };
+  $("#btnConvertAll").onclick=async()=>{ for(const it of queue){ await queueProcess(it); } toast("Đã convert tất cả.","ok"); renderQueue(); };
+  $("#btnDownloadAll").onclick=()=>{ for(const it of queue){ if(!it.outBlob) continue; const a=document.createElement('a'); a.href=URL.createObjectURL(it.outBlob); a.download=it.name+'.'+(it.fmt||'webp'); a.click(); } };
   $("#btnUploadAll").onclick=async()=>{
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
     for(const it of queue){
@@ -1271,17 +1006,8 @@ function initImporter() {
   };
 
   /* Single upload */
-  $("#btnConvert").onclick=()=>{
-    if(!state.imgBlob){ toast("Chưa chọn ảnh.","warn"); return; }
-    toast("Đã nén .webp sẵn.","ok");
-  };
-  $("#btnSaveImg").onclick=()=>{
-    if(!state.imgBlob){ toast("Chưa có ảnh.","warn"); return; }
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(state.imgBlob);
-    a.download=state.imgName||'product.webp';
-    a.click();
-  };
+  $("#btnConvert").onclick=()=>{ if(!state.imgBlob){ toast("Chưa chọn ảnh.","warn"); return; } toast("Đã nén .webp sẵn.","ok"); };
+  $("#btnSaveImg").onclick=()=>{ if(!state.imgBlob){ toast("Chưa có ảnh.","warn"); return; } const a=document.createElement('a'); a.href=URL.createObjectURL(state.imgBlob); a.download=state.imgName||'product.webp'; a.click(); };
   $("#btnUploadImg").onclick=async()=>{
     if(!state.imgBlob){ toast("Chưa có ảnh.","warn"); return; }
     const b=baseUrl(); if(!b){ toast("Chưa cấu hình Worker.","warn"); return; }
@@ -1319,21 +1045,23 @@ function initImporter() {
     }
   };
 
-  /* Build JSON & publish */
+  /* Build JSON & publish (dạng giống Tuyetlethi, nhưng auto-sku + category Bongstudio) */
   function buildJson(){
-    // Tự động tạo SKU nếu đang trống: ưu tiên từ tên sản phẩm
-    let skuRaw = (($("#sku").value)||'').trim();
-    const nameRaw = (($("#name").value)||'').trim();
+    // AUTO SKU: nếu trống thì sinh từ tên
+    let skuRaw = ($("#sku").value||'').trim();
+    const nameRaw = ($("#name").value||'').trim();
     if(!skuRaw && nameRaw){
       skuRaw = slugify(nameRaw);
       $("#sku").value = skuRaw;
     }
+
     if(!$("#category").value.trim()){
       const text=`${$("#name").value} ${$("#brand").value} ${$("#origin").value}`;
       const guess=autoCategory(text);
       if(guess) $("#category").value=guess;
     }
-    $("#category").value=normCategory($("#category").value);
+    $("#category").value = normCategory($("#category").value);
+
     const now=new Date().toISOString();
     const obj={
       name:$("#name").value.trim(),
@@ -1350,88 +1078,49 @@ function initImporter() {
     };
     const dl=$("#deeplink").value.trim();
     if(dl) obj.deeplink=dl;
-    $("#jsonOut").value=JSON.stringify(obj,null,2);
+
+    // JSON hiển thị: 1 mảng gồm 1 sản phẩm (append-style)
+    $("#jsonOut").value=JSON.stringify([obj],null,2);
     return obj;
   }
 
   $("#btnToJson").onclick=buildJson;
-  $("#btnCopyJson").onclick=()=>{
-    $("#jsonOut").select();
-    document.execCommand('copy');
-    toast("Đã copy JSON.");
-  };
-  $("#btnDownloadJson").onclick=async()=>{
-    const obj = buildJson();
-    const listOld = await loadProductsJson();
-    const list = upsertProduct(listOld, obj);
-
-    const blob=new Blob([JSON.stringify(list,null,2)],{type:"application/json"});
+  $("#btnCopyJson").onclick=()=>{ $("#jsonOut").select(); document.execCommand('copy'); toast("Đã copy JSON."); };
+  $("#btnDownloadJson").onclick=()=>{
+    if(!$("#jsonOut").value) buildJson();
+    const blob=new Blob([$("#jsonOut").value],{type:"application/json"});
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download="bongstudio-products.json";
+    a.download='bongstudio-products.append.json';
     a.click();
   };
 
-  async function loadProductsJson(){
-    try{
-      const r = await fetch(PRODUCTS_JSON_PATH + '?_=' + Date.now(), { cache: 'no-cache' });
-      if(!r.ok){
-        log(`[loadProductsJson] ${r.status} — chưa có kho, sẽ tạo file mới.`);
-        return [];
-      }
-      const data = await r.json().catch(()=>null);
-      if(!data) return [];
-      if(Array.isArray(data)) return data;
-      if(Array.isArray(data.items)) return data.items;
-      if(Array.isArray(data.products)) return data.products;
-      return [];
-    }catch(e){
-      log("[loadProductsJson] Lỗi: "+e.message);
-      return [];
-    }
-  }
-
-  function upsertProduct(list, obj){
-    const skuSlug = slugify(obj.sku || '');
-    if(!skuSlug) return list;
-    const idx = list.findIndex(p => slugify(p.sku || '') === skuSlug);
-    if(idx >= 0){
-      list[idx] = { ...list[idx], ...obj };
-    } else {
-      list.push(obj);
-    }
-    return list;
-  }
   $("#btnPublish").onclick = () => doPublish(false);
   $("#btnPublishFeatured").onclick = () => doPublish(true);
 
   async function doPublish(forceFeatured){
-    const obj = buildJson();
-
-    if (forceFeatured) {
-      obj.featured = true;
-      $("#featured").checked = true;
-      $("#jsonOut").value = JSON.stringify(obj, null, 2);
+    const obj=buildJson();
+    if(forceFeatured){
+      obj.featured=true;
+      $("#featured").checked=true;
+      $("#jsonOut").value=JSON.stringify([obj],null,2);
     }
-
-    if (!obj.sku) {
+    if(!obj.sku){
       toast("Thiếu SKU.","err");
       return;
     }
-    if (!obj.origin_url) {
+    if(!obj.origin_url){
       toast("Thiếu origin.","warn");
       return;
     }
-
-    // đảm bảo có deeplink, ưu tiên auto từ template
-    if (!$("#deeplink").value.trim()) {
-      const maybe = activeTplFor($("#merchant").value);
-      if (maybe) {
+    if(!$("#deeplink").value.trim()){
+      const maybe=activeTplFor($("#merchant").value);
+      if(maybe){
         makeDeeplink();
-        const dl = $("#deeplink").value.trim();
-        if (dl) {
-          obj.deeplink = dl;
-          $("#jsonOut").value = JSON.stringify(obj, null, 2);
+        const dl=$("#deeplink").value.trim();
+        if(dl){
+          obj.deeplink=dl;
+          $("#jsonOut").value=JSON.stringify([obj],null,2);
         }
       } else {
         showWarn(true);
@@ -1440,105 +1129,80 @@ function initImporter() {
       }
     }
 
-    // luôn merge với kho JSON hiện tại
-    const listOld = await loadProductsJson();
-    const list    = upsertProduct(listOld, obj);
-    const jsonText = JSON.stringify(list, null, 2);
-    const b = baseUrl();
-
-    // Nếu có Worker → commit thẳng bongstudio-products.json
-    if (b) {
-      try {
-        const payload = {
-          path: PRODUCTS_JSON_PATH,
-          content: jsonText,   // GỬI DẠNG CHUỖI THUẦN
-          note: `feat(product): upsert ${obj.sku} via bongstudio importer`
-        };
-        const r = await fetch(b + "/git/json", {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          headers: hdr("POST", true),
-          body: JSON.stringify(payload)
+    const b=baseUrl();
+    if(b){
+      try{
+        const r=await fetch(b+"/publish",{
+          method:"POST",mode:"cors",cache:"no-cache",
+          headers:hdr('POST',true),
+          body:JSON.stringify(obj)
         });
-        const text = await r.text().catch(() => "");
-        log(`[git/json ${PRODUCTS_JSON_PATH}] ${r.status} ${r.ok ? "OK" : "FAIL"} — ${text.slice(0,200)}`);
-        if (!r.ok) throw new Error("HTTP " + r.status);
-
-        toast(
-          "Publish OK → đã lưu vào kho bongstudio-products.json" +
-          (obj.featured ? " + gắn nổi bật" : "."),
-          "ok"
-        );
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        const text=await r.text().catch(()=>'' );
+        log(`[publish ${obj.sku}] ${r.status} ${r.ok?'OK':'FAIL'} — ${text.slice(0,200)}`);
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        toast("Publish OK → store"+(obj.featured?" + nổi bật":""),"ok");
+        window.scrollTo({top:0,behavior:'smooth'});
         return;
-      } catch (e) {
-        toast("Publish lỗi (sẽ tải kho JSON để commit tay): " + e.message, "err");
+      }catch(e){
+        toast("Publish lỗi (auto tải JSON để commit tay): "+e.message,"err");
       }
     }
-
-    // fallback: tải về toàn bộ kho để commit tay
-    const blob = new Blob([jsonText], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "bongstudio-products.json";
+    // Fallback: cho tải file append để Mai tự commit tay
+    const blob=new Blob([JSON.stringify([obj],null,2)],{type:"application/json"});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='bongstudio-products.append.json';
     a.click();
   }
-  
-  /* Verify JSON trên repo (retry 2 lần để tránh chậm load) */
-  $("#btnVerify").onclick = async () => {
-    const rawSku = $("#sku").value.trim();
-    if (!rawSku) {
+
+  /* Verify: đọc /assets/data/bongstudio-products.json (2 lần để tránh delay) */
+  $("#btnVerify").onclick=async()=>{
+    const rawSku=$("#sku").value.trim();
+    if(!rawSku){
       toast("Chưa có SKU để kiểm tra.","warn");
       return;
     }
     const skuSlug = slugify(rawSku);
 
-    // Helper to check if a list of products contains our SKU
-    const checkSkuInList = (list) => {
-      if (!Array.isArray(list)) return false;
-      const found = list.find(p => slugify((p.sku || '')) === skuSlug);
-      return !!found;
+    const checkSkuInList = (list)=>{
+      if(!Array.isArray(list)) return false;
+      return list.some(x => slugify(String(x.sku||'')) === skuSlug);
     };
 
-    // Helper to fetch the JSON and return the list (or null on error)
-    const fetchListOnce = async () => {
-      try {
-        const r = await fetch(PRODUCTS_JSON_PATH + '?_=' + Date.now(), { cache:'no-cache' });
-        if (!r.ok) {
+    const fetchListOnce = async ()=>{
+      try{
+        const r=await fetch(PRODUCTS_JSON_PATH + '?_=' + Date.now(),{cache:'no-cache'});
+        if(!r.ok){
           toast(`CHƯA THẤY kho JSON (${r.status}): ${PRODUCTS_JSON_PATH}`,"warn");
           return null;
         }
-        const data = await r.json().catch(() => null);
-        if (!data) {
-          toast("Dữ liệu kho JSON không hợp lệ.","err");
-          return null;
-        }
-        if (Array.isArray(data)) return data;
-        if (Array.isArray(data.items)) return data.items;
-        if (Array.isArray(data.products)) return data.products;
+        const data=await r.json().catch(()=>null);
+        if(!data) return [];
+        if(Array.isArray(data)) return data;
+        if(Array.isArray(data.items)) return data.items;
+        if(Array.isArray(data.products)) return data.products;
         return [];
-      } catch (e) {
+      }catch(e){
         toast("Không đọc được kho JSON: "+e.message,"err");
         return null;
       }
     };
 
-    // Lần 1
     const list1 = await fetchListOnce();
-    if (list1 && checkSkuInList(list1)) {
-      toast(`ĐÃ TÌM THẤY SKU ${skuSlug} trong kho JSON.`,"ok");
-      return;
+    if(list1 && checkSkuInList(list1)){
+      toast(`ĐÃ TÌM THẤY SKU ${skuSlug} trong bongstudio-products.json.`,"ok");
+    } else {
+      await new Promise(res=>setTimeout(res,1500));
+      const list2 = await fetchListOnce();
+      if(list2 && checkSkuInList(list2)){
+        toast(`ĐÃ TÌM THẤY SKU ${skuSlug} trong bongstudio-products.json (sau khi chờ).`,"ok");
+      } else {
+        toast(`Kho JSON đã tải được nhưng CHƯA thấy SKU ${skuSlug}.`,"warn");
+      }
     }
 
-    // Chờ một chút rồi thử lại
-    await new Promise(res => setTimeout(res, 1500));
-    const list2 = await fetchListOnce();
-    if (list2 && checkSkuInList(list2)) {
-      toast(`ĐÃ TÌM THẤY SKU ${skuSlug} trong kho JSON.`,"ok");
-    } else {
-      toast(`Kho JSON đã tải được nhưng CHƯA thấy SKU ${skuSlug}.`,"warn");
-    }
+    const url=`/store.html?dev=1&sku=${encodeURIComponent(rawSku)}&v=${Date.now()}`;
+    window.open(url,'_blank');
   };
 
   /* Commit message generator */
@@ -1555,6 +1219,7 @@ function initImporter() {
     toast("Đã tạo & copy commit message.","ok");
   };
 
+  /* Auto-detect template 1 lần lúc mở nếu chưa có */
   (function initAffOnce(){
     const s=readSettings();
     if(!(s.tplShopee||s.tplLazada||s.tplTiktok)){
@@ -1563,10 +1228,11 @@ function initImporter() {
     }
   })();
 
+  // initial render
   renderQueue();
 }
 
-/* Boot */
+/* Boot ngay cả khi DOMContentLoaded đã bắn trước đó */
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initImporter);
 } else {
