@@ -1,44 +1,278 @@
 <!-- REPLACE WHOLE FILE: /lien-he.html -->
-<!doctype html><html lang="vi"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Liên hệ | NThương Store</title>
-<meta name="description" content="Liên hệ tư vấn: Zalo, Facebook, Gọi điện."/>
-<link rel="canonical" href="https://nthuong09.github.io/lien-he.html"/>
-<meta name="robots" content="index,follow"/>
-<meta property="og:title" content="Liên hệ | NThương Store"/>
-<meta property="og:description" content="Zalo • Facebook • Gọi điện"/>
-<meta property="og:url" content="https://nthuong09.github.io/lien-he.html"/>
-<meta property="og:image" content="https://nthuong09.github.io/assets/og/default-og.webp"/>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-<link rel="stylesheet" href="/assets/site.css"/>
-<!-- GA4 trước affiliate -->
-<script defer src="/assets/analytics.js"></script>
+  <title>Liên hệ | Bongstudio</title>
+  <meta name="description" content="Liên hệ Bongstudio để trao đổi sản phẩm, hợp tác affiliate hoặc hỏi thêm về các deal đang có."/>
+  <link rel="canonical" href="https://bongstudio68.github.io/lien-he.html"/>
+  <meta name="robots" content="index,follow"/>
+
+  <meta property="og:title" content="Liên hệ | Bongstudio"/>
+  <meta property="og:description" content="Zalo • Facebook • Gọi điện – kết nối nhanh với Bongstudio."/>
+  <meta property="og:url" content="https://bongstudio68.github.io/lien-he.html"/>
+  <meta property="og:image" content="https://bongstudio68.github.io/assets/og/default-og.webp"/>
+
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0b1020;
+      --card: #020617;
+      --border-soft: rgba(148,163,184,.35);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #ec4899;
+      --accent-soft: #f472b6;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#111827 0,#020617 55%,#000 100%);
+      color:var(--text-main);
+    }
+    a{color:inherit;}
+
+    .container{
+      max-width:800px;
+      margin:0 auto;
+      padding:0 1rem;
+    }
+
+    .site-header{
+      border-bottom:1px solid rgba(148,163,184,.3);
+      background:rgba(15,23,42,.95);
+      backdrop-filter:blur(10px);
+    }
+    .site-header .container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:.6rem 0;
+      gap:.75rem;
+    }
+    .logo{
+      text-decoration:none;
+      display:inline-flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+    .logo-main{
+      font-weight:700;
+      font-size:1.25rem;
+      color:var(--accent-soft);
+    }
+    .logo-sub{
+      font-size:.8rem;
+      color:var(--text-muted);
+    }
+    .main-nav ul{
+      list-style:none;
+      display:flex;
+      gap:.75rem;
+      margin:0;
+      padding:0;
+      font-size:.85rem;
+    }
+    .main-nav a{
+      text-decoration:none;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      color:var(--text-muted);
+    }
+    .main-nav a:hover{color:#e5e7eb;}
+    .main-nav a[data-nav="contact"].is-active{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .contact-hero{
+      padding:2rem 0 1.5rem;
+      background:linear-gradient(135deg,#020617 0%,#0b1120 45%,#111827 100%);
+    }
+    .contact-hero h1{
+      font-size:1.5rem;
+      margin-bottom:.35rem;
+      color:#f9fafb;
+    }
+    .contact-hero p{
+      font-size:.95rem;
+      color:var(--text-muted);
+      max-width:640px;
+    }
+
+    .contact-card{
+      margin-top:1.5rem;
+      border-radius:1rem;
+      border:1px solid var(--border-soft);
+      background:rgba(15,23,42,.96);
+      padding:1.25rem 1.2rem;
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+    }
+    .contact-card h2{
+      margin:0 0 .25rem;
+      font-size:1.05rem;
+      color:#f9fafb;
+    }
+    .contact-row{
+      display:flex;
+      flex-direction:column;
+      gap:.3rem;
+      font-size:.9rem;
+    }
+    .contact-row strong{
+      color:#e5e7eb;
+    }
+    .contact-tag{
+      display:inline-block;
+      padding:.2rem .55rem;
+      border-radius:999px;
+      background:rgba(236,72,153,.15);
+      border:1px solid rgba(236,72,153,.4);
+      font-size:.78rem;
+      color:var(--accent-soft);
+      margin-top:.25rem;
+    }
+
+    .contact-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-top:.5rem;
+    }
+    .btn-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:.5rem .9rem;
+      border-radius:999px;
+      font-size:.85rem;
+      text-decoration:none;
+      border:1px solid var(--border-soft);
+      background:rgba(15,23,42,.7);
+      color:var(--text-muted);
+      transition:transform .1s ease,box-shadow .1s ease,border-color .1s ease,color .1s ease,background-color .1s ease;
+    }
+    .btn-pill.primary{
+      border-color:var(--accent-soft);
+      background:linear-gradient(135deg,#ec4899,#db2777);
+      color:#fff;
+    }
+    .btn-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 16px rgba(0,0,0,.35);
+      border-color:var(--accent-soft);
+      color:#e5e7eb;
+    }
+
+    .site-footer{
+      border-top:1px solid rgba(148,163,184,.2);
+      padding:1rem 0 1.5rem;
+      font-size:.85rem;
+      background:#020617;
+      color:var(--text-muted);
+      margin-top:2rem;
+    }
+    .site-footer strong{color:#e5e7eb;}
+    .site-footer a{color:var(--accent-soft);}
+
+    @media (max-width:640px){
+      .site-header .container{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .main-nav ul{
+        flex-wrap:wrap;
+        justify-content:flex-start;
+      }
+    }
+  </style>
+
+  <script defer src="/assets/analytics.js"></script>
 </head>
 <body>
-<header class="topbar"><div class="container nav">
-  <a class="brand" href="/">NThương Store</a>
-  <nav>
-    <a href="/">Trang chủ</a>
-    <a href="/store.html">Cửa hàng</a>
-    <a href="/store/thoi-trang.html">Thời trang</a>
-    <a href="/store/my-pham.html">Mỹ phẩm</a>
-    <a href="/store/me-va-be.html">Mẹ & Bé</a>
-    <a href="/store/trang-suc.html">Trang sức</a>
-    <a href="/lien-he.html">Liên hệ</a>
-  </nav>
-</div></header>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">
+        <span class="logo-main">Bongstudio</span>
+        <span class="logo-sub">Cửa hàng affiliate đa sàn</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="/" data-nav="home">Trang chủ</a></li>
+          <li><a href="/store.html" data-nav="store">Cửa hàng</a></li>
+          <li><a href="/lien-he.html" data-nav="contact" class="is-active">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<div class="container">
-  <h1>Liên hệ</h1>
-  <p>Chọn kênh thuận tiện để được tư vấn nhanh:</p>
-  <p><a class="btn" href="https://zalo.me/0912251646" target="_blank" rel="noopener">Zalo 0912251646</a></p>
-  <p><a class="btn outline" href="https://www.facebook.com/profile.php?id=61562376418436" target="_blank" rel="noopener">Facebook</a></p>
-  <p><a class="btn" href="tel:0912251646">Gọi ngay</a></p>
-</div>
+  <main>
+    <section class="contact-hero">
+      <div class="container">
+        <h1>Liên hệ Bongstudio</h1>
+        <p>
+          Nếu bạn muốn hỏi thêm về sản phẩm, nhờ tư vấn, hoặc trao đổi về việc làm affiliate cùng Bongstudio,
+          cứ nhắn thẳng qua các kênh bên dưới – nhanh và tiện nhất là Zalo/Facebook.
+        </p>
 
-<footer><div class="container"><small class="muted">© 2025 — NThương Store • MXD Canonical.</small></div></footer>
+        <div class="contact-card">
+          <h2>Kênh liên hệ chính</h2>
+          <div class="contact-row">
+            <strong>Điện thoại / Zalo:</strong>
+            <span>0978 557 797 (Mai)</span>
+            <span class="contact-tag">Ưu tiên Zalo để gửi link &amp; ảnh nhanh</span>
+          </div>
 
-<script>
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
-</script>
-</body></html>
+          <div class="contact-row">
+            <strong>Facebook cá nhân:</strong>
+            <a href="https://www.facebook.com/profile.php?id=100050291345045" target="_blank" rel="noopener">
+              Mai (Bongstudio)
+            </a>
+          </div>
+
+          <div class="contact-row">
+            <strong>Ghi chú nhỏ:</strong>
+            <span>
+              Khi nhắn, bạn có thể gửi kèm link sản phẩm hoặc mô tả nhu cầu (ví dụ: “cần bộ pijama mát, giá dưới 200k”)
+              để Bongstudio lọc deal cho nhanh hơn.
+            </span>
+          </div>
+
+          <div class="contact-links">
+            <a class="btn-pill primary" href="tel:0978557797">Gọi ngay 0978 557 797</a>
+            <a class="btn-pill" href="https://zalo.me/0978557797" target="_blank" rel="noopener">Chat Zalo với Bongstudio</a>
+            <a class="btn-pill" href="https://www.facebook.com/profile.php?id=100050291345045" target="_blank" rel="noopener">
+              Nhắn qua Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <strong>Bongstudio</strong> – cửa hàng affiliate chọn lọc sản phẩm từ nhiều sàn.
+      </div>
+      <div>
+        Liên hệ: 0978 557 797 ·
+        Facebook:
+        <a href="https://www.facebook.com/profile.php?id=100050291345045" target="_blank" rel="noopener">
+          Mai (Bongstudio)
+        </a>
+      </div>
+      <div style="margin-top:.3rem; opacity:.8;">
+        Khi bạn mua qua link affiliate, Bongstudio có thể nhận hoa hồng nhỏ từ sàn nhưng giá bạn trả không đổi.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
